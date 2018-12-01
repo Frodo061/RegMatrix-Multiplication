@@ -1,0 +1,61 @@
+Setting up the environment...
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+
+Index Order: i-k-j
+
+Size of matrix 2048 x 2048
+538214089;25770828926
+538204595;25770854655
+538101679;25770759937
+538083564;25770706965
+538086553;25770707826
+538047174;25770691276
+538048923;25770693763
+538044979;25770693948
+13371047;538045168
+13698970;537967363
+13500601;538003240
+13490970;537987335
+13504408;537985131
+13504449;537951755
+13731047;537923806
+13485489;537928794
+415658717;17126276445
+393545257;17200469994
+500608429;17032761188
+387762902;15000177681
+40075080;9139508719
+36510242;9134097570
+31288589;9147279191
+28299805;9138462485
+56095997425
+56536957212
+56348059424
+56179136395
+56251284807
+56186201916
+56218181095
+56191961391
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 67409.8ms
+Execution Time #1: 67222.9ms
+Execution Time #2: 68389.2ms
+Execution Time #3: 65461.5ms
+Execution Time #4: 65462.1ms
+Execution Time #5: 65474.3ms
+Execution Time #6: 65473.8ms
+Execution Time #7: 70729.1ms

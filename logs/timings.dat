@@ -1,0 +1,121 @@
+Setting up the environment...
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+
+Index Order: i-j-k
+
+Size of matrix 2048 x 2048
+8947546280;17185072941
+8604114242;17184811779
+8604102042;17184813777
+8604193323;17184555585
+8607689125;17184895814
+8607063752;17184904862
+8606964900;17184880372
+8605631199;17184833367
+17709181796;21735484509
+17105023080;21555546154
+17076608947;21640976359
+17082597878;21388080319
+13365207011;15654354431
+9138793321;9901274441
+10019017917;11204577989
+11298615147;13104249121
+517401046;9135354787
+537555487;9104092395
+537566128;9145485783
+537561097;9137556495
+537557667;9144574332
+537555541;9137395878
+537529111;9137104624
+537435713;9142757743
+56503547478
+56846179588
+56875443413
+56831308428
+56844056604
+56856351430
+56741615855
+56800255568
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 71555ms
+Execution Time #1: 67678ms
+Execution Time #2: 67720.3ms
+Execution Time #3: 67185.5ms
+Execution Time #4: 67478.3ms
+Execution Time #5: 67637.1ms
+Execution Time #6: 72918.4ms
+Execution Time #7: 95279.9ms
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+
+Index Order: i-j-k Transposed
+
+Size of matrix 2048 x 2048
+8957489433;17187230325
+8608807206;17186671993
+8608817926;17185779689
+8608558481;17186169619
+8608987142;17179157751
+8608603041;17186430416
+8608376875;17186866039
+8608372256;17186944176
+8600023809;8965911755
+8603228334;8608633421
+8603195311;8608723439
+8603197196;8608683627
+8603187825;8608713771
+8603196166;8608675175
+8601622609;8609636837
+8599265988;8609757389
+791559;8599069392
+788334;8603276311
+792084;8603248355
+787853;8603240575
+787571;8603241410
+793898;8603245833
+13738528;8603248958
+59989081;8603311520
+70028000439
+39134897237
+39046424502
+39142977048
+39078954810
+38855727506
+38680367555
+38603412506
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 32485.8ms
+Execution Time #1: 24548.1ms
+Execution Time #2: 24593.2ms
+Execution Time #3: 24485.3ms
+Execution Time #4: 24612.7ms
+Execution Time #5: 24489ms
+Execution Time #6: 24190.1ms
+Execution Time #7: 24191.1ms

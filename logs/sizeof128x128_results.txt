@@ -1,0 +1,301 @@
+Setting up the environment...
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1
+
+Index Order: i-j-k
+
+Size of matrix 128 x 128
+2105413;3599755
+2105904;3498677
+2106310;3480657
+2095684;3472649
+2095548;3502838
+2105706;3471789
+2105940;3476383
+2106203;3482425
+618;2105712
+713;2105861
+740;2105993
+357;2087048
+426;2086617
+486;2098084
+429;2098124
+511;2097644
+456;904
+432;862
+400;774
+404;757
+390;694
+566;939
+387;781
+568;951
+5810639
+5811721
+5812096
+5813189
+5814698
+5812594
+5812846
+5813071
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 5.477ms
+Execution Time #1: 5.483ms
+Execution Time #2: 5.477ms
+Execution Time #3: 5.477ms
+Execution Time #4: 5.476ms
+Execution Time #5: 5.465ms
+Execution Time #6: 5.472ms
+Execution Time #7: 5.473ms
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_1_TR
+
+Index Order: i-j-k Transposed
+
+Size of matrix 128 x 128
+2103591;3805657
+2103187;3805399
+2102998;3806655
+2098895;3809643
+2101239;3492056
+2111110;3391293
+2111456;3425757
+2111646;3400372
+847;2112109
+716;2111525
+806;2111987
+784;2102249
+845;2102899
+906;2111476
+720;2113256
+808;2113327
+505;956
+670;919
+445;760
+549;845
+447;728
+376;834
+458;816
+421;850
+5799662
+5806383
+5807985
+5802179
+5801360
+5803214
+5802100
+5799933
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 5.695ms
+Execution Time #1: 5.454ms
+Execution Time #2: 5.442ms
+Execution Time #3: 5.681ms
+Execution Time #4: 5.693ms
+Execution Time #5: 5.68ms
+Execution Time #6: 5.59ms
+Execution Time #7: 5.586ms
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_2
+
+Index Order: i-k-j
+
+Size of matrix 128 x 128
+131347;6291722
+131663;6291591
+131455;6291536
+131529;6291303
+131494;6291338
+131563;6291548
+131592;6291522
+131517;6291427
+752;131572
+587;131719
+665;131008
+696;131112
+701;131491
+665;131521
+660;131565
+717;131578
+473;820
+449;717
+301;571
+488;685
+349;543
+556;714
+415;559
+450;628
+4281913
+4281487
+4281179
+4283816
+4283335
+4282908
+4283701
+4282425
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 4.781ms
+Execution Time #1: 4.783ms
+Execution Time #2: 4.772ms
+Execution Time #3: 4.773ms
+Execution Time #4: 4.769ms
+Execution Time #5: 4.779ms
+Execution Time #6: 4.769ms
+Execution Time #7: 4.767ms
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3
+
+Index Order: j-k-i
+
+Size of matrix 128 x 128
+2194244;5896992
+2196383;5894476
+2196314;5893870
+2196134;5897842
+2194983;5896078
+2195283;5896321
+2195016;5892783
+2195061;5891803
+2229;2193642
+1493;2194404
+1230;2194973
+1336;2195158
+1599;2195806
+1893;2193908
+2074;2194580
+2186;2195003
+365;1959
+263;2554
+343;1668
+290;1616
+309;1712
+339;2066
+300;1562
+281;1761
+4861963
+4849421
+4858466
+4861026
+4932998
+4936985
+4931209
+4936166
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 5.95ms
+Execution Time #1: 5.914ms
+Execution Time #2: 5.9ms
+Execution Time #3: 5.934ms
+Execution Time #4: 5.909ms
+Execution Time #5: 5.908ms
+Execution Time #6: 5.915ms
+Execution Time #7: 5.916ms
+rm -f build/* bin/*
+g++ -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+g++ -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DDOT_PR_3_TR
+
+Index Order: j-k-i Transposed
+
+Size of matrix 128 x 128
+2209296;5855597
+2210049;5858555
+2208725;5854882
+2209051;5853411
+2208403;5857420
+2208075;5854446
+2205025;5883458
+2207046;5871039
+1960;2208009
+3521;2208890
+1977;2206618
+1653;2206657
+1605;2206775
+1401;2210392
+1418;2211110
+1910;2208336
+591;1762
+606;2240
+600;1906
+672;1882
+648;1704
+611;1427
+592;1536
+625;1472
+4829294
+4819081
+4828144
+4827259
+4829714
+4833171
+4829185
+4826277
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time #0: 6.072ms
+Execution Time #1: 5.999ms
+Execution Time #2: 6ms
+Execution Time #3: 5.995ms
+Execution Time #4: 5.99ms
+Execution Time #5: 6.06ms
+Execution Time #6: 6.074ms
+Execution Time #7: 6.069ms

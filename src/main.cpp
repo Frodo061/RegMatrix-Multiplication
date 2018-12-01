@@ -1,150 +1,69 @@
 #include <iostream>
 #include <string>
+#include <string.h>
 #include "../include/utils.h"
 #include "../include/matrix.h"
 
 using std::cout;
 using std::endl;
 
-void (*dp_func)(float *, float *, float *, int);
+float *ma, *mb, *mc;
 
-long long unsigned dot_product_1(float *ma, float *mb, float *mc, unsigned n) {
-    start();
-    regularMatrixMult(ma, mb, mc, n);
-    long long unsigned sequential_time = stop();
-
-    bool resultAB = validateAB(ma, mb, mc, n);
-    fillMatrixC(mc, n);
-    regularMatrixMult(mb, ma, mc, n);
-    bool resultBA = validateBA(ma, mb, mc, n);
-    if(!(resultAB && resultBA)) {
-        sequential_time = 0;
-    }
-    return sequential_time;
-
-}
-
-long long unsigned dot_product_1_tr(float *ma, float *mb, float *mc, unsigned n) {
-    start();
-    regularMatrixMultTr(ma, mb, mc, n);
-    long long unsigned sequential_time = stop();
-
-    bool resultAB = validateAB(ma, mb, mc, n);
-    fillMatrixC(mc, n);
-    regularMatrixMultTr(mb, ma, mc, n);
-    bool resultBA = validateBA(ma, mb, mc, n);
-    if(!(resultAB && resultBA)) {
-        sequential_time = 0;
-    }
-    return sequential_time;
-
-}
-
-long long unsigned dot_product_2(float *ma, float *mb, float *mc, unsigned n) {
-    start();
-    matrixMultIndexOrder1(ma, mb, mc, n);
-    long long unsigned sequential_time = stop();
-
-    bool resultAB = validateAB(ma, mb, mc, n);
-    fillMatrixC(mc, n);
-    matrixMultIndexOrder1(mb, ma, mc, n);
-    bool resultBA = validateBA(ma, mb, mc, n);
-    if(!(resultAB && resultBA)) {
-        sequential_time = 0;
-    }
-    return sequential_time;
-}
-
-long long unsigned dot_product_3(float *ma, float *mb, float *mc, unsigned n) {
-    start();
-    matrixMultIndexOrder2(ma, mb, mc, n);
-    long long unsigned sequential_time = stop();
-
-    bool resultAB = validateAB(ma, mb, mc, n);
-    fillMatrixC(mc, n);
-    matrixMultIndexOrder2(mb, ma, mc, n);
-    bool resultBA = validateBA(ma, mb, mc, n);
-    if(!(resultAB && resultBA)) {
-        sequential_time = 0;
-    }
-    return sequential_time;
-}
-
-long long unsigned dot_product_3_tr(float *ma, float *mb, float *mc, unsigned n) {
-    start();
-    matrixMultIndexOrder2Tr(ma, mb, mc, n);
-    long long unsigned sequential_time = stop();
-
-    bool resultAB = validateAB(ma, mb, mc, n);
-    fillMatrixC(mc, n);
-    matrixMultIndexOrder2Tr(mb, ma, mc, n);
-    bool resultBA = validateBA(ma, mb, mc, n);
-    if(!(resultAB && resultBA)) {
-        sequential_time = 0;
-    }
-    return sequential_time;
-
-}
+void (*dp_func)(float *, float *, float *, unsigned);
 
 int main(int argc, char *argv[]) {
-    unsigned size = std::stoul(argv[1]);
-    float ma[size*size], mb[size*size], mc[size*size];
 
-    fillMatrixA(ma, size);
-    fillMatrixB(mb, size);
-    fillMatrixC(mc, size);
+    if(argc < 3) {
+        cout << "usage: bin/main size(32|128|1024|2048)" "type(time|l1mr|l2mr|l3mr|flops|vecops)" << endl;
+        return -1;
+    }
+
+    unsigned size = std::stoul(argv[1]);
+    const char *type=strdup(argv[2]);
+
+    #if defined(DOT_PR_1_BL) || defined(DOT_PR_2_BL) || defined(DOT_PR_3_BL)
+    if(argc == 4) {
+        #undef BLOCKSIZE
+        #define BLOCKSIZE atoi(argv[3])    
+    } else {
+        cout << "No size for blocks was provided! Using default block size of 1" << endl;
+    }
+    #endif
     
     #ifdef DOT_PR_1
-
-    dp_func = &dot_product_1
-    
-    long long unsigned sequential_time = dot_product_1(ma, mb, mc, size);
-    if(sequential_time == 0) {
-        cout << "Regular Implementation Failed with wrong result!" << endl;
-        return -1;
-    }
-    cout << "Sequential time: " << sequential_time << " usecs" << endl;
-
+    dp_func = &regularMatrixMult;
     #elif DOT_PR_1_TR
-
-    long long unsigned sequential_time = dot_product_1_tr(ma, mb, mc, size);
-    if(sequential_time == 0) {
-        cout << "Regular Implementation Failed with wrong result!" << endl;
-        return -1;
-    }
-    cout << "Sequential time: " << sequential_time << " usecs" << endl;
-
+    dp_func = &regularMatrixMultTr;
+    #elif DOT_PR_1_BL
+    dp_func = &regularMatrixMultBl;
     #elif DOT_PR_2
-
-    long long unsigned sequential_time = dot_product_2(ma, mb, mc, size);
-    if(sequential_time == 0) {
-        cout << "Regular Implementation Failed with wrong result!" << endl;
-        return -1;
-    }
-    cout << "Sequential time: " << sequential_time << " usecs" << endl;
-    
+    dp_func = &matrixMultIndexOrder1;
+    #elif DOT_PR_2_BL
+    dp_func = &matrixMultIndexOrder1Bl;
     #elif DOT_PR_3
-    
-    long long unsigned sequential_time = dot_product_3(ma, mb, mc, size);
-    if(sequential_time == 0) {
-        cout << "Regular Implementation Failed with wrong result!" << endl;
-        return -1;
-    }
-    cout << "Sequential time: " << sequential_time << " usecs" << endl;
-	
+    dp_func = &matrixMultIndexOrder2;
     #elif DOT_PR_3_TR
-
-    long long unsigned sequential_time = dot_product_3_tr(ma, mb, mc, size);
-    if(sequential_time == 0) {
-        cout << "Regular Implementation Failed with wrong result!" << endl;
-        return -1;
-    }
-    cout << "Sequential time: " << sequential_time << " usecs" << endl;
-
+    dp_func = &matrixMultIndexOrder2Tr;
+    #elif DOT_PR_3_BL
+    dp_func = &matrixMultIndexOrder2Bl;
     #else
     cout << "No implementation Selected!" << endl;   
     return -1;
     #endif
+    
+    utils_setup_papi(8,type);
+    for(unsigned i = 0; i < 8; i++){
+        utils_init_matrices(&ma, &mb, &mc, size);
+        clearCache();    
+        utils_start_timer();
+        utils_start_papi(type);
+        dp_func(ma, mb, mc, size);
+        utils_stop_papi(i, type);
+        utils_stop_timer();
+        utils_clean_matrices(&ma,&mb,&mc);
+    }
+
+    utils_results(type);
 
     return 0;
 }

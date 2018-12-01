@@ -1,23 +1,78 @@
-CXX		  := g++
-CXX_FLAGS := -Wall -Wextra -std=c++17 -ggdb
+BIN_NAME = main
 
-BIN		:= bin
-SRC		:= src
-INCLUDE	:= include
-LIB		:= lib
+# CXX = g++
+# LD  = g++
 
-LIBRARIES	:=
-EXECUTABLE	:= main
+CXX = g++
+LD  = icpc
 
+#-fopenmp/-openmp for GNU/Intel
 
-all: $(BIN)/$(EXECUTABLE)
+CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+#CXXFLAGS    = -O3 -Wall -Wextra -qopenmp -std=c++11 -Wno-unused-parameter -qopt-report=3
+
+ifeq ($(DOT_PR_1),yes)
+	CXXFLAGS += -DDOT_PR_1
+endif
+
+ifeq ($(DOT_PR_1_TR),yes)
+	CXXFLAGS += -DDOT_PR_1_TR
+endif
+
+ifeq ($(DOT_PR_1_BL),yes)
+	CXXFLAGS += -DDOT_PR_1_BL
+endif
+
+ifeq ($(DOT_PR_2),yes)
+	CXXFLAGS += -DDOT_PR_2
+endif
+
+ifeq ($(DOT_PR_2_BL),yes)
+	CXXFLAGS += -DDOT_PR_2_BL
+endif
+
+ifeq ($(DOT_PR_3),yes)
+	CXXFLAGS += -DDOT_PR_3
+endif
+
+ifeq ($(DOT_PR_3_TR),yes)
+	CXXFLAGS += -DDOT_PR_3_TR
+endif
+
+ifeq ($(DOT_PR_3_BL),yes)
+	CXXFLAGS += -DDOT_PR_3_BL
+endif
+
+SRC_DIR = src
+BIN_DIR = bin
+BUILD_DIR = build
+LOG_DIR = logs
+SRC = $(wildcard $(SRC_DIR)/*.cpp)
+OBJ = $(patsubst src/%.cpp,build/%.o,$(SRC))
+DEPS = $(patsubst build/%.o,build/%.d,$(OBJ))
+BIN = $(BIN_NAME)
+
+vpath %.cpp $(SRC_DIR)
+
+.DEFAULT_GOAL = all
+
+$(BUILD_DIR)/%.d: %.cpp
+	$(CXX) -M $< -o $@ -lm $(CXXFLAGS)
+
+$(BUILD_DIR)/%.o: %.cpp
+	$(CXX) -c $< -o $@ -lm $(CXXFLAGS)
+
+$(BIN_DIR)/$(BIN_NAME): $(DEPS) $(OBJ)
+	$(CXX) -o $@ $(OBJ) -lm $(CXXFLAGS)
+
+checkdirs:
+	@mkdir -p $(BUILD_DIR)
+	@mkdir -p $(BIN_DIR)
+
+all: checkdirs $(BIN_DIR)/$(BIN_NAME)
 
 run: clean all
-	clear
-	./$(BIN)/$(EXECUTABLE)
-
-$(BIN)/$(EXECUTABLE): $(SRC)/*.cpp
-	$(CXX) $(CXX_FLAGS) -I$(INCLUDE) -L$(LIB) $^ -o $@ $(LIBRARIES)
+	./bin/main
 
 clean:
-	-rm $(BIN)/*
+	rm -f $(BUILD_DIR)/* $(BIN_DIR)/*
