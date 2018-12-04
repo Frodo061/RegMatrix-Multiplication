@@ -3,13 +3,13 @@ BIN_NAME = main
 # CXX = g++
 # LD  = g++
 
-CXX = g++
+CXX = icpc
 LD  = icpc
 
 #-fopenmp/-openmp for GNU/Intel
 
-CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
-#CXXFLAGS    = -O3 -Wall -Wextra -qopenmp -std=c++11 -Wno-unused-parameter -qopt-report=3
+#CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
 
 ifeq ($(DOT_PR_1),yes)
 	CXXFLAGS += -DDOT_PR_1
