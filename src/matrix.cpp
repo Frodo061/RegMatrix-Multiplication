@@ -32,17 +32,20 @@ void mcopy(float *m, float *c, unsigned n) {
 	}
 }
 
-void transpose (float *m, unsigned n, int blocksize){
+void transpose (float *m, unsigned n){
+    float tmp;
     for (unsigned i = 0; i < n; i ++) {
         for (unsigned j = i+1; j < n; j ++) {
-            m[i * n + j] = m[j*n + i];
-            m[j*n + i] = m[i * n + j];
+            tmp = m[i*n + j];
+            m[i*n + j] = m[j*n + i];
+            m[j*n + i] = tmp;
         }
     }
 }
 
 //Index Order i-j-k
 void regularMatrixMult (float *ma, float *mb, float *mc, unsigned n) {
+    
 	for (unsigned i = 0; i < n; i++) {
 		for (unsigned j = 0; j < n; j++) {
 			for (unsigned k = 0; k < n; k++) {
@@ -54,11 +57,11 @@ void regularMatrixMult (float *ma, float *mb, float *mc, unsigned n) {
 
 //Index Order i-j-k Transposed
 void regularMatrixMultTr(float *ma, float *mb, float *mc, unsigned n) {
-    transpose(mb,n,1);
+    transpose(mb,n);
 	for (unsigned i = 0; i < n; i++) {
 		for (unsigned j = 0; j < n; j++) {
 			for (unsigned k = 0; k < n; k++) {
-                mc[i * n + j] += ma[i * n + k] * mb[k * n + j];
+                mc[i * n + j] += ma[i * n + k] * mb[j * n + k];
 			}
 		}
 	}
@@ -66,12 +69,13 @@ void regularMatrixMultTr(float *ma, float *mb, float *mc, unsigned n) {
 
 //Index Order i-j-k Transposed Blocks
 void regularMatrixMultBl(float *ma, float *mb, float *mc, unsigned n){
-    transpose(mb, n, 1);
+    transpose(mb, n);
 
     for( unsigned br = 0; br < n; br+=BLOCKSIZE)
         for( unsigned bc = 0; bc < n; bc+=BLOCKSIZE)
             for( unsigned i = 0; i < n; i++)
                 for( unsigned j = br; j < br+BLOCKSIZE; j++) 
+                    #pragma ivdep
                     for( unsigned k = bc; k < bc+BLOCKSIZE; k++)
                         mc[i*n+j] += ma[i*n+k] * mb[j*n+k];
 
@@ -90,12 +94,17 @@ void matrixMultIndexOrder1(float *ma, float *mb, float *mc, unsigned n) {
 
 //Index Order i-k-j Blocks
 void matrixMultIndexOrder1Bl(float *ma, float *mb, float *mc, unsigned n) {
-    for( unsigned br = 0; br < n; br+=BLOCKSIZE)
-        for( unsigned bc = 0; bc < n; bc+=BLOCKSIZE)
-            for( unsigned i = 0; i < n; i++)
-                for( unsigned k = br; k < br+BLOCKSIZE; k++) 
-                    for( unsigned j = bc; j < bc+BLOCKSIZE; j++)
-                        mc[i*n+j] += ma[i*n+k] * mb[k*n+j];
+    for(unsigned ii = 0; ii < n; ii += BLOCKSIZE) {
+        for(unsigned jj = 0 ; jj < n; jj += BLOCKSIZE) {
+            for(unsigned i = 0; i < n; i++) {
+                for(unsigned k = ii; k < ii + BLOCKSIZE; k++){
+                    for(unsigned j = jj; j < jj + BLOCKSIZE; j++){
+                        mc[i * n + j] += ma[i * n + k] * mb[k * n + j];
+                    }
+                }
+            }
+        }
+    }
 }
 
 //Index Order j-k-i
@@ -103,7 +112,7 @@ void matrixMultIndexOrder2(float *ma, float *mb, float *mc, unsigned n) {
     for(unsigned j = 0; j < n; j++){
         for(unsigned k = 0; k < n; k++){
             for(unsigned i = 0; i < n; i++){
-                mc[i*n+j] += ma[k*n+i] * mb[j*n+k];
+                mc[i*n+j] += ma[i*n+k] * mb[k*n+j];
             }
         }
     }
@@ -112,49 +121,41 @@ void matrixMultIndexOrder2(float *ma, float *mb, float *mc, unsigned n) {
 
 //Index Order j-k-i Transposed
 void matrixMultIndexOrder2Tr(float *ma, float *mb, float *mc, unsigned n) {
-    transpose(ma, n, 1);
-    transpose(mb, n, 1);
+    transpose(ma, n);
+    transpose(mb, n);
 
-    for(unsigned j = 0; j < n; j++){
-        for(unsigned k = 0; k < n; k++){
-            for(unsigned i = 0; i < n; i++){
-                mc[i*n+j] += ma[k*n+i] * mb[j*n+k];
+    for(unsigned j = 0; j < n; ++j){
+        for(unsigned k = 0; k < n; ++k){
+            for(unsigned i = 0; i < n; ++i){
+                mc[j*n+i] += ma[k*n+i] * mb[j*n+k];
             }
         }
     }
+    transpose(mc, n);
 }
 
 //Index Order j-k-i Transposed Blocks
 void matrixMultIndexOrder2Bl(float *ma,float *mb,float *mc, unsigned n) { 
-    transpose(ma,n,1);
-    transpose(mb,n,1);
+    transpose(ma,n);
+    transpose(mb,n);
+    
     for( unsigned br = 0; br < n; br+=BLOCKSIZE)
         for( unsigned bc = 0; bc < n; bc+=BLOCKSIZE)
             for( unsigned j = 0; j < n; j++)
                 for( unsigned k = br; k < br+BLOCKSIZE; k++) 
                     for( unsigned i = bc; i < bc+BLOCKSIZE; i++)
-                        mc[i*n+j] += ma[k*n+i] * mb[j*n+k];
+                        mc[j*n+i] += ma[k*n+i] * mb[j*n+k];
+
+    transpose(mc, n);
 }
 
 
-bool validateAB(float *ma, float *mb, float *mc, unsigned n) {
+bool validate(float *ma, float *mb, float *mc, unsigned n) {
     bool result = true;
     //all resulting columns should have the same values
     for(unsigned i = 0; i < n*n && result; i += n) {
         float tmp = mc[i];
         for(unsigned j = 0; j < n && result; j++) {
-            if(mc[i + j] != tmp) result = false;
-        }
-    }
-    return result;
-}
-
-bool validateBA(float *ma, float *mb, float *mc, unsigned n) {
-    bool result = true;
-    //all resulting rows should have the same values
-    for(unsigned i = 0; i < n && result; i++){
-        float tmp = mc[i];
-        for(unsigned j = 0; j < n*n && result; j += n){
             if(mc[i + j] != tmp) result = false;
         }
     }

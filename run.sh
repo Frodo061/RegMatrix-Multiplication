@@ -2,9 +2,9 @@
 #PBS -l nodes=1:ppn=1:r662
 #PBS -q mei
 #PBS -l walltime=2:00:00
-#PBS -N dot_pr_3
-#PBS -e /home/a77070/projects/aa/WorkAssignment/logs/errors.dat
-#PBS -o /home/a77070/projects/aa/WorkAssignment/logs/sizeof2048x2048_3_results.txt
+#PBS -N dot_pr_1_vec
+#PBS -e /home/a77070/projects/aa/WorkAssignment/logs/errors.txt
+#PBS -o /home/a77070/projects/aa/WorkAssignment/logs/results.txt
 
 cd /home/a77070/projects/aa/WorkAssignment
 
@@ -13,12 +13,20 @@ echo "Setting up the environment..."
 module load papi/5.5.0
 module load gcc/5.3.0
 
-papi_avail > var/papi_counters.txt
-lscpu > var/xeon_cpu_info.txt
+source /share/apps/intel/parallel_studio_xe_2019/compilers_and_libraries_2019/linux/bin/compilervars.sh intel64
+
+cat /proc/cpuinfo > tmp/cpuinfo.txt
+papi_avail > tmp/papi_counters.txt
+
+export VEC=no
 
 #'DOT_PR_1' 'DOT_PR_1_TR' 'DOT_PR_2' 'DOT_PR_3' 'DOT_PR_3_TR' 'DOT_PR_1_BL' 'DOT_PR_2_BL' 'DOT_PR_3_BL'
+algs=( 'DOT_PR_3_TR' )
 
-for alg in 'DOT_PR_3' 'DOT_PR_3_TR'
+#32 128 1024 2048
+sizes=( 32 128 1024 2048 )
+
+for alg in ${algs[@]}
 do
     if [ $alg == 'DOT_PR_1' ]; then
         export DOT_PR_1=yes
@@ -26,7 +34,7 @@ do
         make
         echo ""
         echo "Index Order: i-j-k"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -42,7 +50,7 @@ do
         make
         echo ""
         echo "Index Order: i-j-k Transposed"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -58,7 +66,7 @@ do
         make
         echo ""
         echo "Index Order: i-j-k Transposed with Blocking"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -74,7 +82,7 @@ do
         make
         echo ""
         echo "Index Order: i-k-j"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -90,7 +98,7 @@ do
         make
         echo ""
         echo "Index Order: i-k-j with Blocking"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -106,7 +114,7 @@ do
         make
         echo ""
         echo "Index Order: j-k-i"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -122,7 +130,7 @@ do
         make
         echo ""
         echo "Index Order: j-k-i Transposed"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size
@@ -138,7 +146,7 @@ do
         make
         echo ""
         echo "Index Order: j-k-i Transposed with Blocking"
-        for size in 2048
+        for size in ${sizes[@]}
         do
             echo ""
             echo Size of matrix $size x $size

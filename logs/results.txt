@@ -1,0 +1,214 @@
+Setting up the environment...
+rm -f build/* bin/*
+icpc -M src/main.cpp -o build/main.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+
+icpc -M src/matrix.cpp -o build/matrix.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+
+icpc -M src/utils.cpp -o build/utils.d -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+
+icpc -c src/main.cpp -o build/main.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+icpc -c src/matrix.cpp -o build/matrix.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+icpc -c src/utils.cpp -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+icpc -o bin/main build/main.o build/matrix.o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3_TR
+
+Index Order: j-k-i Transposed
+
+Size of matrix 32 x 32
+278;69959
+193;69643
+208;69643
+215;69643
+215;69644
+212;69645
+211;69643
+210;69644
+135;276
+115;213
+116;214
+125;217
+121;218
+117;213
+111;213
+116;213
+152;167
+118;127
+142;146
+143;151
+161;172
+139;147
+143;152
+116;123
+65587
+66336
+66330
+66307
+66387
+65564
+65564
+65571
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time;0.043
+Execution Time;0.037
+Execution Time;0.037
+Execution Time;0.036
+Execution Time;0.037
+Execution Time;0.037
+Execution Time;0.038
+Execution Time;0.037
+
+Size of matrix 128 x 128
+149333;4260192
+149553;4259922
+149546;4259884
+149565;4259935
+149541;4259893
+149242;4259937
+149230;4259873
+149162;4259880
+1243;149251
+1287;149524
+1453;149608
+1261;149479
+1221;149525
+1272;149233
+1302;149179
+1187;149196
+728;1459
+718;1385
+677;1275
+641;1256
+709;1265
+703;1370
+654;1311
+659;1417
+4200528
+4198922
+4198988
+4199069
+4199146
+4200487
+4200586
+4200454
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time;2
+Execution Time;1.982
+Execution Time;2.002
+Execution Time;1.984
+Execution Time;1.989
+Execution Time;1.98
+Execution Time;1.98
+Execution Time;1.982
+
+Size of matrix 1024 x 1024
+70501819;2151756519
+70504629;2151762759
+70507971;2151762355
+70508119;2151762735
+70507629;2151763534
+70508248;2151763034
+70508274;2151762470
+70509754;2151762831
+3198668;70506143
+3224947;70498196
+3225843;70500250
+3224581;70499793
+3223036;70500909
+3223704;70508034
+3222591;70509926
+3225078;70506510
+139318;3231711
+137577;3285716
+137394;3275854
+137370;3276858
+137540;3275446
+137569;3285850
+137557;3285649
+137590;3286930
+2211744921
+2153754766
+2153747598
+2153750694
+2153748960
+2153204765
+2153201378
+2153195648
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time;1000.68
+Execution Time;993.175
+Execution Time;993.191
+Execution Time;993.394
+Execution Time;993.321
+Execution Time;993.233
+Execution Time;993.194
+Execution Time;993.216
+
+Size of matrix 2048 x 2048
+550859130;17197271394
+550773859;17197265479
+550780743;17197271635
+550780600;17197266685
+550782562;17197266558
+550639785;17197240574
+550640774;17197241932
+550639009;17197240836
+18947400;550811730
+18813740;550697072
+18861722;550734622
+18823429;550730530
+18852637;550734579
+18763565;550614085
+18767639;550612895
+18764442;550613278
+847628;24257071
+900407;23539834
+894640;23552901
+894904;23549395
+893801;23554731
+915466;23472089
+913154;23468853
+912953;23451730
+17736790172
+17211354787
+17211327212
+17211333523
+17211351589
+17207183858
+17207168844
+17207168366
+0
+0
+0
+0
+0
+0
+0
+0
+Execution Time;7935.49
+Execution Time;7852.1
+Execution Time;7852.41
+Execution Time;7852.14
+Execution Time;7851.61
+Execution Time;7852.38
+Execution Time;7852.36
+Execution Time;7852.01

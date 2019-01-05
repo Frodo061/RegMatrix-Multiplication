@@ -2,9 +2,8 @@ matrix.o: src/matrix.cpp src/../include/matrix.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/iostream \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/x86_64-unknown-linux-gnu/bits/c++config.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/x86_64-unknown-linux-gnu/bits/os_defines.h \
- /usr/include/features.h /usr/include/sys/cdefs.h \
- /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
- /usr/include/gnu/stubs-64.h \
+ /usr/include/features.h /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
+ /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/x86_64-unknown-linux-gnu/bits/cpu_defines.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/ostream \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/ios \
@@ -14,9 +13,9 @@ matrix.o: src/matrix.cpp src/../include/matrix.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/postypes.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/cwchar /usr/include/wchar.h \
  /usr/include/stdio.h \
- /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/stdarg.h \
+ /share/apps/intel/compilers_and_libraries_2019.0.117/linux/compiler/include/stdarg.h \
  /usr/include/bits/wchar.h \
- /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/stddef.h \
+ /share/apps/intel/compilers_and_libraries_2019.0.117/linux/compiler/include/stddef.h \
  /usr/include/xlocale.h /share/apps/gcc/5.3.0/include/c++/5.3.0/exception \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/atomic_lockfree_defines.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/exception_ptr.h \
@@ -39,16 +38,14 @@ matrix.o: src/matrix.cpp src/../include/matrix.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/ptr_traits.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/predefined_ops.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/cstdint \
+ /share/apps/intel/compilers_and_libraries_2019.0.117/linux/compiler/include/stdint.h \
  /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/stdint.h \
- /usr/include/stdint.h \
- /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/localefwd.h \
+ /usr/include/stdint.h /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/localefwd.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/x86_64-unknown-linux-gnu/bits/c++locale.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/clocale /usr/include/locale.h \
- /usr/include/bits/locale.h \
- /share/apps/gcc/5.3.0/include/c++/5.3.0/cctype /usr/include/ctype.h \
- /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/endian.h /usr/include/bits/endian.h \
- /usr/include/bits/byteswap.h \
+ /usr/include/bits/locale.h /share/apps/gcc/5.3.0/include/c++/5.3.0/cctype \
+ /usr/include/ctype.h /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/endian.h /usr/include/bits/endian.h /usr/include/bits/byteswap.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/ios_base.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/atomicity.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/x86_64-unknown-linux-gnu/bits/gthr.h \
@@ -75,16 +72,14 @@ matrix.o: src/matrix.cpp src/../include/matrix.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/string_conversions.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/cstdlib /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/sys/types.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/sigset.h \
- /usr/include/sys/sysmacros.h /usr/include/alloca.h \
+ /usr/include/sys/types.h /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/sigset.h /usr/include/sys/sysmacros.h /usr/include/alloca.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/cstdio /usr/include/libio.h \
  /usr/include/_G_config.h /usr/include/bits/stdio_lim.h \
  /usr/include/bits/sys_errlist.h /usr/include/bits/stdio.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/cerrno /usr/include/errno.h \
- /usr/include/bits/errno.h /usr/include/linux/errno.h \
- /usr/include/asm/errno.h /usr/include/asm-generic/errno.h \
- /usr/include/asm-generic/errno-base.h \
+ /usr/include/bits/errno.h /usr/include/linux/errno.h /usr/include/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/functional_hash.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/hash_bytes.h \
  /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/basic_string.tcc \

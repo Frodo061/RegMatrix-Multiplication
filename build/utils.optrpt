@@ -1,0 +1,1447 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C++ Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 19.0.0.117 Build 20180804
+
+Compiler options: -I/share/apps/papi/5.5.0/include -c -o build/utils.o -lm -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -L/share/apps/papi/5.5.0/lib -lpapi -no-vec -DDOT_PR_3
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: operator new(std::size_t, void *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (operator new(std::size_t, void *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/new(130,1)
+
+===========================================================================
+
+Begin optimization report for: operator delete(void *, void *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (operator delete(void *, void *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/new(135,67)
+
+===========================================================================
+
+Begin optimization report for: _mm_malloc(size_t, size_t)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (_mm_malloc(size_t, size_t)) /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h(39,1)
+
+===========================================================================
+
+Begin optimization report for: clearCache()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (clearCache()) [4] src/utils.cpp(23,24)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at src/utils.cpp(24,2)
+   remark #15540: loop was not vectorized: auto-vectorization is disabled with -no-vec flag
+   remark #25438: unrolled without remainder by 2  
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(23,24):remark #34051: REGISTER ALLOCATION : [_Z10clearCachev] src/utils.cpp:23
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    5[ rax rdx rcx zmm0-zmm1]
+        
+    Routine temporaries
+        Total         :      13
+            Global    :       7
+            Local     :       6
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_start_timer()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_start_timer()) [5] src/utils.cpp(28,30)
+  -> EXTERN: (29,2) gettimeofday(timeval *, timezone *)
+
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(28,30):remark #34051: REGISTER ALLOCATION : [_Z17utils_start_timerv] src/utils.cpp:28
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rax rsi rdi]
+        
+    Routine temporaries
+        Total         :      11
+            Global    :       6
+            Local     :       5
+        Regenerable   :       3
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_setup_papi(int, const char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_setup_papi(int, const char *)) [6] src/utils.cpp(54,58)
+  -> EXTERN: (55,10) strcmp(const char *, const char *)
+  -> EXTERN: (59,15) strcmp(const char *, const char *)
+  -> EXTERN: (62,25) malloc(size_t)
+  -> EXTERN: (66,15) strcmp(const char *, const char *)
+  -> EXTERN: (69,25) malloc(size_t)
+  -> EXTERN: (73,15) strcmp(const char *, const char *)
+  -> EXTERN: (76,25) malloc(size_t)
+  -> EXTERN: (80,15) strcmp(const char *, const char *)
+  -> EXTERN: (83,25) malloc(size_t)
+  -> EXTERN: (86,15) strcmp(const char *, const char *)
+  -> EXTERN: (89,25) malloc(size_t)
+  -> EXTERN: (92,28) malloc(size_t)
+  -> EXTERN: (95,34) malloc(size_t)
+  -> EXTERN: (97,5) PAPI_library_init(int)
+  -> EXTERN: (98,5) PAPI_create_eventset(int *)
+  -> EXTERN: (99,5) PAPI_add_events(int, int *, int)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at src/utils.cpp(93,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed FLOW dependence between values[i] (95:9) and values (95:9)
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(54,58):remark #34051: REGISTER ALLOCATION : [_Z16utils_setup_papiiPKc] src/utils.cpp:54
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    8[ rax rdx rcx rsi rdi r12-r14]
+        
+    Routine temporaries
+        Total         :      76
+            Global    :      31
+            Local     :      45
+        Regenerable   :      20
+        Spilled       :       3
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       8 bytes*
+            Reads     :       1 [1.07e-01 ~ 0.3%]
+            Writes    :       1 [1.07e-01 ~ 0.3%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_results(const char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_results(const char *)) [7] src/utils.cpp(102,38)
+  -> INLINE (MANUAL): (103,41) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+  -> EXTERN: (106,14) strcmp(const char *, const char *)
+  -> INLINE (MANUAL): (108,43) std::vector<unsigned long long, std::allocator<unsigned long long>>::at(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(824,2) std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_range_check(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type) const
+      -> INLINE (MANUAL): (802,19) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+      -> EXTERN: (803,4) std::__throw_out_of_range_fmt(const char *, ...)
+      -> INLINE (MANUAL): (806,19) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(825,16) std::vector<unsigned long long, std::allocator<unsigned long long>>::operator[](std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)
+  -> (109,18) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *)
+  -> (109,39) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double)
+  -> (109,45) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+  -> EXTERN: (111,19) strcmp(const char *, const char *)
+  -> (113,18) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (113,34) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *)
+  -> (113,39) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (113,54) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+  -> EXTERN: (115,19) strcmp(const char *, const char *)
+  -> (117,18) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (117,34) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *)
+  -> (117,39) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (117,54) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+  -> EXTERN: (119,19) strcmp(const char *, const char *)
+  -> (121,18) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (121,34) std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *)
+  -> (121,39) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (121,54) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+  -> EXTERN: (123,19) strcmp(const char *, const char *)
+  -> (125,18) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (125,34) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+  -> EXTERN: (127,19) strcmp(const char *, const char *)
+  -> (129,18) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+  -> (129,34) std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at src/utils.cpp(104,5)
+   remark #15520: loop was not vectorized: loop with multiple exits cannot be vectorized unless it meets search loop idiom criteria   [ /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(803,4) ]
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(102,38):remark #34051: REGISTER ALLOCATION : [_Z13utils_resultsPKc] src/utils.cpp:102
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    9[ rax rdx rcx rsi rdi r12-r14 zmm0]
+        
+    Routine temporaries
+        Total         :     166
+            Global    :      48
+            Local     :     118
+        Regenerable   :      48
+        Spilled       :       4
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       8 bytes*
+            Reads     :       1 [1.10e+00 ~ 0.5%]
+            Writes    :       1 [1.10e+00 ~ 0.5%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::operator<<<std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &, const char *))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(557,5)
+
+===========================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::setstate(std::basic_ios<char, std::char_traits<char>> *, std::ios_base::iostate)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ios<char, std::char_traits<char>>::setstate(std::basic_ios<char, std::char_traits<char>> *, std::ios_base::iostate))/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/basic_ios.h(158,7)
+
+===========================================================================
+
+Begin optimization report for: std::char_traits<char>::length(const std::char_traits<char>::char_type *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::char_traits<char>::length(const std::char_traits<char>::char_type *)) [10] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/char_traits.h(267,7)
+  -> EXTERN: (267,16) __builtin_strlen(const char *)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/char_traits.h(267,7):remark #34051: REGISTER ALLOCATION : [_ZNSt11char_traitsIcE6lengthEPKc] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/char_traits.h:267
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rax rdx rdi]
+        
+    Routine temporaries
+        Total         :      12
+            Global    :       7
+            Local     :       5
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, long long))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(202,7)
+
+===========================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &))
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, std::basic_ostream<char, std::char_traits<char>>::__ostream_type &(*)(std::basic_ostream<char, std::char_traits<char>>::__ostream_type &)))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(109,7)
+
+===========================================================================
+
+Begin optimization report for: std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ostream<char, std::char_traits<char>>::operator<<(std::basic_ostream<char, std::char_traits<char>> *, double))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(221,7)
+
+===========================================================================
+
+Begin optimization report for: utils_clean_matrices(float **, float **, float **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_clean_matrices(float **, float **, float **)) [14] src/utils.cpp(134,58)
+  -> EXTERN: (136,9) free(void *)
+  -> EXTERN: (138,9) free(void *)
+  -> EXTERN: (140,9) free(void *)
+
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(134,58):remark #34051: REGISTER ALLOCATION : [_Z20utils_clean_matricesPPfS0_S0_] src/utils.cpp:134
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    6[ rax rdx rsi rdi r14-r15]
+        
+    Routine temporaries
+        Total         :      19
+            Global    :      11
+            Local     :       8
+        Regenerable   :       1
+        Spilled       :       2
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_start_papi(const char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_start_papi(const char *)) [15] src/utils.cpp(144,41)
+  -> EXTERN: (145,9) strcmp(const char *, const char *)
+  -> EXTERN: (146,9) PAPI_start(int)
+
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(144,41):remark #34051: REGISTER ALLOCATION : [_Z16utils_start_papiPKc] src/utils.cpp:144
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rax rsi rdi]
+        
+    Routine temporaries
+        Total         :      15
+            Global    :       7
+            Local     :       8
+        Regenerable   :       2
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::ctype<char>::widen(const std::ctype<char> *, char) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::ctype<char>::widen(const std::ctype<char> *, char) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/locale_facets.h(873,7)
+
+===========================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::rdstate(const std::basic_ios<char, std::char_traits<char>> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ios<char, std::char_traits<char>>::rdstate(const std::basic_ios<char, std::char_traits<char>> *) const)/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/basic_ios.h(138,7)
+
+===========================================================================
+
+Begin optimization report for: std::basic_ios<char, std::char_traits<char>>::widen(const std::basic_ios<char, std::char_traits<char>> *, char) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::basic_ios<char, std::char_traits<char>>::widen(const std::basic_ios<char, std::char_traits<char>> *, char) const)/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/basic_ios.h(450,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Destroy_aux<true>::__destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Destroy_aux<true>::__destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(112,55)
+
+===========================================================================
+
+Begin optimization report for: std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/allocator.h(113,27)
+
+===========================================================================
+
+Begin optimization report for: std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *const)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *const)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/allocator.h(113,7)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::allocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::size_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::allocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::size_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(360,7)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::deallocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::pointer, std::allocator_traits<std::allocator<unsigned long long>>::size_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::deallocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::pointer, std::allocator_traits<std::allocator<unsigned long long>>::size_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(386,7)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::max_size(const std::allocator<unsigned long long> &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::max_size(const std::allocator<unsigned long long> &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(425,7)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::_S_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::allocator_traits<std::allocator<unsigned long long>>::_S_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)) [25] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(256,2)
+  -> INLINE (MANUAL): (256,8) __gnu_cxx::new_allocator<unsigned long long>::construct<unsigned long long, unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *, unsigned long long &&)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,18) operator new(std::size_t, void *)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,27) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+  -> INLINE (MANUAL): (256,23) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(256,2):remark #34051: REGISTER ALLOCATION : [_ZNSt16allocator_traitsISaIyEE12_S_constructIyJyEEENSt9enable_ifIXsr3std6__and_IJNS1_18__construct_helperIT_JDpT0_EE4typeEEEE5valueEvE4typeERS0_PS5_DpOS6_] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:256
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    4[ rax rdx rsi rdi]
+        
+    Routine temporaries
+        Total         :      12
+            Global    :       8
+            Local     :       4
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)->std::_Require<std::allocator_traits<std::allocator<unsigned long long>>::__has_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>>
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)->std::_Require<std::allocator_traits<std::allocator<unsigned long long>>::__has_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>>) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(402,2)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::_S_destroy<unsigned long long>(std::allocator<unsigned long long> &, unsigned long long *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::allocator_traits<std::allocator<unsigned long long>>::_S_destroy<unsigned long long>(std::allocator<unsigned long long> &, unsigned long long *)) [27] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(285,2)
+  -> DELETED: (285,8) __gnu_cxx::new_allocator<unsigned long long>::destroy<unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(285,2):remark #34051: REGISTER ALLOCATION : [_ZNSt16allocator_traitsISaIyEE10_S_destroyIyEENSt9enable_ifIXsr3std6__and_IJNS1_16__destroy_helperIT_E4typeEEEE5valueEvE4typeERS0_PS5_] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:285
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    2[ rsi rdi]
+        
+    Routine temporaries
+        Total         :       8
+            Global    :       0
+            Local     :       8
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::destroy<unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::destroy<unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(124,27)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(const std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(const std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(118,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(125,19)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *const)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *const)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(124,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::~_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::~_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(160,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::~_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *const)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::~_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *const)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(159,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_allocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::size_t)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_allocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::size_t)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(168,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl::_Vector_impl(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl::_Vector_impl(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(88,2)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::max_size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::max_size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(660,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::operator[](std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::operator[](std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(780,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_range_check(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_range_check(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(801,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::at(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::at(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(823,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::push_back(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &&)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::push_back(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &&)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(932,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_check_len(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type, const char *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_check_len(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type, const char *) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(1423,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::emplace_back<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::emplace_back<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc(93,7)
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_emplace_back_aux<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_emplace_back_aux<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc(409,7)
+
+===========================================================================
+
+Begin optimization report for: std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::move_iterator(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::move_iterator(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator.h(985,25)
+
+===========================================================================
+
+Begin optimization report for: std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::base(const std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::base(const std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator.h(993,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::_S_base(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::_S_base(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator_base_types.h(224,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::_S_base(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::_S_base(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator_base_types.h(216,7)
+
+===========================================================================
+
+Begin optimization report for: std::__copy_move<true, true, std::iterator_traits<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_category>::__copy_m<unsigned long long>(const unsigned long long *, const unsigned long long *, unsigned long long *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__copy_move<true, true, std::iterator_traits<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_category>::__copy_m<unsigned long long>(const unsigned long long *, const unsigned long long *, unsigned long long *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(374,9)
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::new_allocator(__gnu_cxx::new_allocator<unsigned long long> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::new_allocator(__gnu_cxx::new_allocator<unsigned long long> *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(79,45)
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::allocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::size_type, const void *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::allocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::size_type, const void *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(100,7)
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::deallocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::pointer, __gnu_cxx::new_allocator<unsigned long long>::size_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::deallocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::pointer, __gnu_cxx::new_allocator<unsigned long long>::size_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(110,7)
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::construct<unsigned long long, unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *, unsigned long long &&)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::construct<unsigned long long, unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *, unsigned long long &&)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(120,2)
+
+===========================================================================
+
+Begin optimization report for: std::operator|(std::_Ios_Iostate, std::_Ios_Iostate)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::operator|(std::_Ios_Iostate, std::_Ios_Iostate)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/ios_base.h(170,3)
+
+===========================================================================
+
+Begin optimization report for: std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::endl<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(591,5)
+
+===========================================================================
+
+Begin optimization report for: std::flush<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+NEVER EMIT DEFINITION FUNCTION: (std::flush<char, std::char_traits<char>>(std::basic_ostream<char, std::char_traits<char>> &))/share/apps/gcc/5.3.0/include/c++/5.3.0/ostream(613,5)
+
+===========================================================================
+
+Begin optimization report for: std::__check_facet<std::basic_ios<char, std::char_traits<char>>::__ctype_type>(const std::basic_ios<char, std::char_traits<char>>::__ctype_type *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__check_facet<std::basic_ios<char, std::char_traits<char>>::__ctype_type>(const std::basic_ios<char, std::char_traits<char>>::__ctype_type *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/basic_ios.h(48,5)
+
+===========================================================================
+
+Begin optimization report for: std::move<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>(std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::move<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>(std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/move.h(102,5)
+
+===========================================================================
+
+Begin optimization report for: std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/move.h(77,5)
+
+===========================================================================
+
+Begin optimization report for: std::max<std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type>(const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &, const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::max<std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type>(const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &, const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(220,5)
+
+===========================================================================
+
+Begin optimization report for: std::__make_move_if_noexcept_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__make_move_if_noexcept_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator.h(1167,5)
+
+===========================================================================
+
+Begin optimization report for: std::copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(461,5)
+
+===========================================================================
+
+Begin optimization report for: std::__miter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__miter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(294,5)
+
+===========================================================================
+
+Begin optimization report for: std::__copy_move_a2<true, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__copy_move_a2<true, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(435,5)
+
+===========================================================================
+
+Begin optimization report for: std::__niter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__niter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(283,5)
+
+===========================================================================
+
+Begin optimization report for: std::__copy_move_a<true, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type>(std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__copy_move_a<true, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type>(std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(390,5)
+
+===========================================================================
+
+Begin optimization report for: std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(123,5)
+
+===========================================================================
+
+Begin optimization report for: __sti__$E()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (__sti__$E()) [67] <compiler generated>
+  -> INLINE: /share/apps/gcc/5.3.0/include/c++/5.3.0/iostream:(74,25) __sti__time_measurement()
+    -> EXTERN: src/utils.cpp:(14,29) operator new(std::size_t)
+    -> src/utils.cpp:(14,29) std::vector<unsigned long long, std::allocator<unsigned long long>>::vector(std::vector<unsigned long long, std::allocator<unsigned long long>> *)
+  -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/iostream:(74,25) __cxa_atexit(void (*)(void *), void *, void *)
+  -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/iostream:(74,25) std::ios_base::Init::Init(std::ios_base::Init *)
+
+
+    Report from: Code generation optimizations [cg]
+
+<compiler generated>:remark #34051: REGISTER ALLOCATION : [__sti__$E] (null):0
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    5[ rax rdx rsi rdi r15]
+        
+    Routine temporaries
+        Total         :      17
+            Global    :       9
+            Local     :       8
+        Regenerable   :       8
+        Spilled       :       1
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::vector(std::vector<unsigned long long, std::allocator<unsigned long long>> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::vector<unsigned long long, std::allocator<unsigned long long>>::vector(std::vector<unsigned long long, std::allocator<unsigned long long>> *)) [68] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(257,17)
+  -> INLINE (MANUAL): (253,7) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *const)
+    -> INLINE (MANUAL): (124,7) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_base(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+      -> INLINE (MANUAL): (124,7) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl::_Vector_impl(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Vector_impl *)
+        -> INLINE (MANUAL): (86,2) std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *const)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/allocator.h:(113,7) std::allocator<unsigned long long>::allocator(std::allocator<unsigned long long> *)
+            -> DELETED: (113,7) __gnu_cxx::new_allocator<unsigned long long>::new_allocator(__gnu_cxx::new_allocator<unsigned long long> *const)
+            -> EXTERN: (113,27) __cxa_call_unexpected
+  -> EXTERN: (257,17) __cxa_call_unexpected
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(257,17):remark #34051: REGISTER ALLOCATION : [_ZNSt6vectorIySaIyEEC1Ev] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:257
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    2[ rax rdi]
+        
+    Routine temporaries
+        Total         :       9
+            Global    :       0
+            Local     :       9
+        Regenerable   :       1
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::new_allocator(__gnu_cxx::new_allocator<unsigned long long> *const)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::new_allocator(__gnu_cxx::new_allocator<unsigned long long> *const)) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(79,7)
+
+===========================================================================
+
+Begin optimization report for: __sti__time_measurement()
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__sti__time_measurement()) <compiler generated>
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::_S_max_size<const std::allocator<unsigned long long>, void>(const std::allocator<unsigned long long> &, int)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::_S_max_size<const std::allocator<unsigned long long>, void>(const std::allocator<unsigned long long> &, int)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(312,2)
+
+===========================================================================
+
+Begin optimization report for: std::allocator_traits<std::allocator<unsigned long long>>::destroy<unsigned long long>(std::allocator<unsigned long long> &, unsigned long long *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::allocator_traits<std::allocator<unsigned long long>>::destroy<unsigned long long>(std::allocator<unsigned long long> &, unsigned long long *)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h(414,2)
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)) [73] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(114,7)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(114,7):remark #34051: REGISTER ALLOCATION : [_ZNSt12_Vector_baseIySaIyEE19_M_get_Tp_allocatorEv] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:114
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    2[ rax rdi]
+        
+    Routine temporaries
+        Total         :       9
+            Global    :       0
+            Local     :       9
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_deallocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::size_t)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_deallocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::size_t)) [74] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(175,7)
+  -> INLINE (MANUAL): (178,4) std::allocator_traits<std::allocator<unsigned long long>>::deallocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::pointer, std::allocator_traits<std::allocator<unsigned long long>>::size_type)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(386,13) __gnu_cxx::new_allocator<unsigned long long>::deallocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::pointer, __gnu_cxx::new_allocator<unsigned long long>::size_type)
+      -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(110,9) operator delete(void *)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(175,7):remark #34051: REGISTER ALLOCATION : [_ZNSt12_Vector_baseIySaIyEE13_M_deallocateEPym] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:175
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    3[ rdx rsi rdi]
+        
+    Routine temporaries
+        Total         :      11
+            Global    :       7
+            Local     :       4
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const) [75] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(655,7)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h(655,7):remark #34051: REGISTER ALLOCATION : [_ZNKSt6vectorIySaIyEE4sizeEv] /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:655
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    2[ rax rdi]
+        
+    Routine temporaries
+        Total         :      12
+            Global    :       0
+            Local     :      12
+        Regenerable   :       0
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: __gnu_cxx::new_allocator<unsigned long long>::max_size(const __gnu_cxx::new_allocator<unsigned long long> *) const
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (__gnu_cxx::new_allocator<unsigned long long>::max_size(const __gnu_cxx::new_allocator<unsigned long long> *) const) /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h(114,7)
+
+===========================================================================
+
+Begin optimization report for: std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_construct.h(150,5)
+
+===========================================================================
+
+Begin optimization report for: std::uninitialized_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::uninitialized_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(109,5)
+
+===========================================================================
+
+Begin optimization report for: std::__uninitialized_copy_a<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__uninitialized_copy_a<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(281,5)
+
+===========================================================================
+
+Begin optimization report for: std::__uninitialized_move_if_noexcept_a<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type &)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__uninitialized_move_if_noexcept_a<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type &)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(301,5)
+
+===========================================================================
+
+Begin optimization report for: std::__uninitialized_copy<true>::__uninit_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+
+    Report from: Interprocedural optimizations [ipo]
+
+DEAD STATIC FUNCTION: (std::__uninitialized_copy<true>::__uninit_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)) /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h(93,9)
+
+===========================================================================
+
+Begin optimization report for: utils_stop_papi(int, const char *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_stop_papi(int, const char *)) [82] src/utils.cpp(149,49)
+  -> EXTERN: (150,9) strcmp(const char *, const char *)
+  -> EXTERN: (151,9) PAPI_stop(int, long long *)
+
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(149,49):remark #34051: REGISTER ALLOCATION : [_Z15utils_stop_papiiPKc] src/utils.cpp:149
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    4[ rax rcx rsi rdi]
+        
+    Routine temporaries
+        Total         :      21
+            Global    :       8
+            Local     :      13
+        Regenerable   :       2
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_init_matrices(float **, float **, float **, int)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_init_matrices(float **, float **, float **, int)) [83] src/utils.cpp(39,65)
+  -> INLINE (MANUAL): (42,19) _mm_malloc(size_t, size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(42,12) malloc(size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(45,7) posix_memalign(void **, size_t, size_t)
+  -> INLINE (MANUAL): (43,19) _mm_malloc(size_t, size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(42,12) malloc(size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(45,7) posix_memalign(void **, size_t, size_t)
+  -> INLINE (MANUAL): (44,19) _mm_malloc(size_t, size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(42,12) malloc(size_t)
+    -> EXTERN: /share/apps/gcc/5.3.0/lib/gcc/x86_64-unknown-linux-gnu/5.3.0/include/mm_malloc.h:(45,7) posix_memalign(void **, size_t, size_t)
+  -> EXTERN: (47,28) rand()
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at src/utils.cpp(45,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #15346: vector dependence: assumed OUTPUT dependence between *a[i] (47:11) and *b[i] (48:11)
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+src/utils.cpp(39,65):remark #34051: REGISTER ALLOCATION : [_Z19utils_init_matricesPPfS0_S0_i] src/utils.cpp:39
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   12[ rax rdx rcx rbx rbp rsi rdi r12-r15 zmm0]
+        
+    Routine temporaries
+        Total         :      52
+            Global    :      27
+            Local     :      25
+        Regenerable   :      14
+        Spilled       :       7
+        
+    Routine stack
+        Variables     :      24 bytes*
+            Reads     :       3 [2.70e+00 ~ 2.2%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      16 bytes*
+            Reads     :       2 [5.90e+00 ~ 4.8%]
+            Writes    :       2 [1.80e+00 ~ 1.5%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: utils_stop_timer()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (utils_stop_timer()) [84] src/utils.cpp(33,29)
+  -> EXTERN: (34,2) gettimeofday(timeval *, timezone *)
+  -> INLINE (MANUAL): (36,20) std::vector<unsigned long long, std::allocator<unsigned long long>>::push_back(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &&)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(932,9) std::vector<unsigned long long, std::allocator<unsigned long long>>::emplace_back<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc:(96,6) std::allocator_traits<std::allocator<unsigned long long>>::construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)->std::_Require<std::allocator_traits<std::allocator<unsigned long long>>::__has_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>>
+        -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(402,4) std::allocator_traits<std::allocator<unsigned long long>>::_S_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+          -> INLINE (MANUAL): (256,8) __gnu_cxx::new_allocator<unsigned long long>::construct<unsigned long long, unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *, unsigned long long &&)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,18) operator new(std::size_t, void *)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,27) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+          -> INLINE (MANUAL): (256,23) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+        -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(402,27) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc:(97,10) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc:(101,4) std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_emplace_back_aux<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+        -> INLINE (MANUAL): (411,4) std::vector<unsigned long long, std::allocator<unsigned long long>>::_M_check_len(const std::vector<unsigned long long, std::allocator<unsigned long long>> *, std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type, const char *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1424,6) std::vector<unsigned long long, std::allocator<unsigned long long>>::max_size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+            -> INLINE (MANUAL): (660,16) std::allocator_traits<std::allocator<unsigned long long>>::max_size(const std::allocator<unsigned long long> &)
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,7) __cxa_call_unexpected
+              -> DELETED: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,16) std::allocator_traits<std::allocator<unsigned long long>>::_S_max_size<const std::allocator<unsigned long long>, void>(const std::allocator<unsigned long long> &, int)
+            -> INLINE (MANUAL): (660,40) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(const std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1424,19) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1425,4) std::__throw_length_error(const char *)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1427,26) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1427,35) std::max<std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type>(const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &, const std::vector<unsigned long long, std::allocator<unsigned long long>>::size_type &)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1427,44) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1428,18) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1428,36) std::vector<unsigned long long, std::allocator<unsigned long long>>::max_size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+            -> INLINE (MANUAL): (660,16) std::allocator_traits<std::allocator<unsigned long long>>::max_size(const std::allocator<unsigned long long> &)
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,7) __cxa_call_unexpected
+              -> DELETED: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,16) std::allocator_traits<std::allocator<unsigned long long>>::_S_max_size<const std::allocator<unsigned long long>, void>(const std::allocator<unsigned long long> &, int)
+            -> INLINE (MANUAL): (660,40) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(const std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(1428,50) std::vector<unsigned long long, std::allocator<unsigned long long>>::max_size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+            -> INLINE (MANUAL): (660,16) std::allocator_traits<std::allocator<unsigned long long>>::max_size(const std::allocator<unsigned long long> &)
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,7) __cxa_call_unexpected
+              -> DELETED: /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(425,16) std::allocator_traits<std::allocator<unsigned long long>>::_S_max_size<const std::allocator<unsigned long long>, void>(const std::allocator<unsigned long long> &, int)
+            -> INLINE (MANUAL): (660,40) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(const std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *) const
+        -> INLINE (MANUAL): (412,28) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_allocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::size_t)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(170,20) std::allocator_traits<std::allocator<unsigned long long>>::allocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::size_type)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(360,20) __gnu_cxx::new_allocator<unsigned long long>::allocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::size_type, const void *)
+              -> DELETED: /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(101,18) __gnu_cxx::new_allocator<unsigned long long>::max_size(const __gnu_cxx::new_allocator<unsigned long long> *) const
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(102,4) std::__throw_bad_alloc()
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(104,27) operator new(std::size_t)
+        -> INLINE (MANUAL): (416,6) std::allocator_traits<std::allocator<unsigned long long>>::construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)->std::_Require<std::allocator_traits<std::allocator<unsigned long long>>::__has_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>>
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(402,4) std::allocator_traits<std::allocator<unsigned long long>>::_S_construct<unsigned long long, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::allocator<unsigned long long> &, unsigned long long *, std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type &&)
+            -> INLINE (MANUAL): (256,8) __gnu_cxx::new_allocator<unsigned long long>::construct<unsigned long long, unsigned long long>(__gnu_cxx::new_allocator<unsigned long long> *, unsigned long long *, unsigned long long &&)
+              -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,18) operator new(std::size_t, void *)
+              -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(120,27) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+            -> INLINE (MANUAL): (256,23) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(402,27) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+        -> INLINE (MANUAL): (416,60) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+        -> INLINE (MANUAL): (417,10) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+        -> INLINE (MANUAL): (421,10) std::__uninitialized_move_if_noexcept_a<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_Tp_alloc_type &)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h:(302,14) std::__uninitialized_copy_a<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)
+            -> INLINE (MANUAL): (281,14) std::uninitialized_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+              -> INLINE (MANUAL): (123,14) std::__uninitialized_copy<true>::__uninit_copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+                -> INLINE (MANUAL): (93,18) std::copy<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+                  -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h:(468,15) std::__copy_move_a2<true, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer)
+                    -> INLINE (MANUAL): (436,18) std::__copy_move_a<true, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type>(std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type, std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::iterator_type)
+                      -> INLINE (MANUAL): (399,14) std::__copy_move<true, true, std::iterator_traits<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_category>::__copy_m<unsigned long long>(const unsigned long long *, const unsigned long long *, unsigned long long *)
+                        -> EXTERN: (382,6) __builtin_memmove(void *, const void *, unsigned long)
+                    -> INLINE (MANUAL): (436,46) std::__niter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                      -> INLINE (MANUAL): (283,14) std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::_S_base(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                    -> INLINE (MANUAL): (437,11) std::__niter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                      -> INLINE (MANUAL): (283,14) std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::_S_base(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                    -> INLINE (MANUAL): (438,11) std::__niter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type>(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                      -> INLINE (MANUAL): (283,14) std::_Iter_base<std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type, false>::_S_base(std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::iterator_type)
+                  -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h:(469,9) std::__miter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+                    -> INLINE (MANUAL): (294,14) std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::_S_base(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+                      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator_base_types.h:(224,21) std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::base(const std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *) const
+                  -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h:(469,37) std::__miter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+                    -> INLINE (MANUAL): (294,14) std::_Iter_base<std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>, true>::_S_base(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>)
+                      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator_base_types.h:(224,21) std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::base(const std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *) const
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h:(303,3) std::__make_move_if_noexcept_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator.h:(1167,26) std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::move_iterator(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_type)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_uninitialized.h:(304,3) std::__make_move_if_noexcept_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>>(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_iterator.h:(1167,26) std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::move_iterator(std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer> *, std::move_iterator<std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer>::iterator_type)
+        -> INLINE (MANUAL): (423,22) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+        -> EXTERN: (427,2) __cxa_begin_catch
+        -> EXTERN: (428,4) __cxa_end_catch
+        -> DELETED: (430,8) std::allocator_traits<std::allocator<unsigned long long>>::destroy<unsigned long long>(std::allocator<unsigned long long> &, unsigned long long *)
+        -> (430,60) std::vector<unsigned long long, std::allocator<unsigned long long>>::size(const std::vector<unsigned long long, std::allocator<unsigned long long>> *) const
+        -> DELETED: (432,8) std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)
+        -> (432,49) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+        -> (433,6) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_deallocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::size_t)
+        -> EXTERN: (434,6) __cxa_rethrow
+        -> DELETED: (436,2) std::_Destroy<std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, unsigned long long>(std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::vector<unsigned long long, std::allocator<unsigned long long>>::pointer, std::allocator<unsigned long long> &)
+        -> INLINE (MANUAL): (437,9) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_get_Tp_allocator(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *)
+        -> INLINE (MANUAL): (438,2) std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::_M_deallocate(std::_Vector_base<unsigned long long, std::allocator<unsigned long long>> *, std::_Vector_base<unsigned long long, std::allocator<unsigned long long>>::pointer, std::size_t)
+          -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(178,4) std::allocator_traits<std::allocator<unsigned long long>>::deallocate(std::allocator<unsigned long long> &, std::allocator_traits<std::allocator<unsigned long long>>::pointer, std::allocator_traits<std::allocator<unsigned long long>>::size_type)
+            -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/alloc_traits.h:(386,13) __gnu_cxx::new_allocator<unsigned long long>::deallocate(__gnu_cxx::new_allocator<unsigned long long> *, __gnu_cxx::new_allocator<unsigned long long>::pointer, __gnu_cxx::new_allocator<unsigned long long>::size_type)
+              -> EXTERN: /share/apps/gcc/5.3.0/include/c++/5.3.0/ext/new_allocator.h:(110,9) operator delete(void *)
+      -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/vector.tcc:(101,24) std::forward<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>(std::remove_reference<std::remove_reference<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>::type>::type &)
+    -> INLINE (MANUAL): /share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_vector.h:(932,22) std::move<std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &>(std::vector<unsigned long long, std::allocator<unsigned long long>>::value_type &)
+
+
+    Report from: Code generation optimizations [cg]
+
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(382,6):remark #34014: optimization advice for memmove: increase the destination's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(382,6):remark #34014: optimization advice for memmove: increase the source's alignment to 16 (and use __assume_aligned) to speed up library implementation
+/share/apps/gcc/5.3.0/include/c++/5.3.0/bits/stl_algobase.h(382,6):remark #34026: call to memmove implemented as a call to optimized library version
+src/utils.cpp(33,29):remark #34051: REGISTER ALLOCATION : [_Z16utils_stop_timerv] src/utils.cpp:33
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    9[ rax rdx rbp rsi rdi r12-r15]
+        
+    Routine temporaries
+        Total         :      38
+            Global    :      20
+            Local     :      18
+        Regenerable   :       5
+        Spilled       :       5
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================

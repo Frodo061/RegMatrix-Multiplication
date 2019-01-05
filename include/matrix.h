@@ -16,5 +16,4 @@ void matrixMultIndexOrder1Bl(float *ma, float *mb, float *mc, unsigned n);
 void matrixMultIndexOrder2(float *ma, float *mb, float *mc, unsigned n);
 void matrixMultIndexOrder2Tr(float *ma, float *mb, float *mc, unsigned n);
 void matrixMultIndexOrder2Bl(float *ma,float *mb,float *mc, unsigned n);
-bool validateAB(float *ma, float *mb, float *mc, unsigned n);
-bool validateBA(float *ma, float *mb, float *mc, unsigned n);
+bool validate(float *ma, float *mb, float *mc, unsigned n);

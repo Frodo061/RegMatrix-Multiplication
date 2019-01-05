@@ -60,6 +60,10 @@ int main(int argc, char *argv[]) {
         dp_func(ma, mb, mc, size);
         utils_stop_papi(i, type);
         utils_stop_timer();
+        if(!validate(ma, mb, mc, size)) {
+            cout << "Matrix Multiplication failed: algorithm is incorrect" << endl;
+            return -1;
+        }
         utils_clean_matrices(&ma,&mb,&mc);
     }
 

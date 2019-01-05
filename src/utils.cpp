@@ -67,7 +67,7 @@ void utils_setup_papi(int repetitions, const char *type) {
     {
         numEvents = 2;
         events = (int *)malloc(numEvents * sizeof(int));
-        events[0] = PAPI_L2_TCM;
+        events[0] = PAPI_L3_DCR;
         events[1] = PAPI_L1_DCM;
     }
     else if (!strcmp(type, "l3mr"))
@@ -75,7 +75,7 @@ void utils_setup_papi(int repetitions, const char *type) {
         numEvents = 2;
         events = (int *)malloc(numEvents * sizeof(int));
         events[0] = PAPI_L3_TCM;
-        events[1] = PAPI_L2_TCM;
+        events[1] = PAPI_L3_TCA;
     }
     else if (!strcmp(type, "flops"))
     {
@@ -106,7 +106,7 @@ void utils_results(const char *type) {
         if (!strcmp(type, "time"))
         {
             double tm = time_measurement->at(i) / (double)1000;
-            cout << "Execution Time #" << i << ": " << tm << "ms" << endl;
+            cout << "Execution Time;" << tm << endl;
         }
         else if (!strcmp(type, "l1mr"))
         {
