@@ -1,15 +1,23 @@
+#CC = /home/a77763/tools/gcc-4.9.3/bin/
+
 BIN_NAME = main
+
+ifndef CXX
+CXX = icpc
+endif
+
+ifeq ($(CXX),icpc)
+	CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+else
+	CXXFLAGS = -O3 -g -fopt-info-all=build/report.fopt -lpapi -fopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib #-O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -fopt-info-vec-all=build/report.fopt -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+endif
 
 # CXX = g++
 # LD  = g++
 
-CXX = icpc
-LD  = icpc
-
 #-fopenmp/-openmp for GNU/Intel
 
-#CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
-CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp  -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+#
 
 ifeq ($(VEC),no)
 	CXXFLAGS += -no-vec

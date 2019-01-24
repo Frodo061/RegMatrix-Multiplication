@@ -1,18 +1,21 @@
 -------------------------------------------------------------
 STREAM version $Revision: 5.10 $
 -------------------------------------------------------------
-This system uses 8 bytes per array element.
+This system uses 4 bytes per array element.
 -------------------------------------------------------------
-Array size = 10000000 (elements), Offset = 0 (elements)
-Memory per array = 76.3 MiB (= 0.1 GiB).
-Total memory required = 228.9 MiB (= 0.2 GiB).
-Each kernel will be executed 10 times.
+Array size = 6295081 (elements), Offset = 0 (elements)
+Memory per array = 24.0 MiB (= 0.0 GiB).
+Total memory required = 72.0 MiB (= 0.1 GiB).
+Each kernel will be executed 7 times.
  The *best* time for each kernel (excluding the first iteration)
  will be used to compute the reported bandwidth.
 -------------------------------------------------------------
-Your clock granularity/precision appears to be 1 microseconds.
-Each test below will take on the order of 9238 microseconds.
-   (= 9238 clock ticks)
+Number of Threads requested = 8
+Number of Threads counted = 8
+-------------------------------------------------------------
+Your clock granularity/precision appears to be 10 microseconds.
+Each test below will take on the order of 2268 microseconds.
+   (= 226 clock ticks)
 Increase the size of the arrays if this shows that
 you are not getting at least 20 clock ticks per test.
 -------------------------------------------------------------
@@ -21,10 +24,45 @@ For best results, please be sure you know the
 precision of your system timer.
 -------------------------------------------------------------
 Function    Best Rate MB/s  Avg time     Min time     Max time
-Copy:           17429.5     0.009719     0.009180     0.012707
-Scale:          17076.0     0.009637     0.009370     0.010352
-Add:            20139.5     0.012442     0.011917     0.015288
-Triad:          19980.0     0.012576     0.012012     0.014396
+Copy:           50406.4     0.003543     0.000999     0.005338
+Scale:          15698.1     0.004119     0.003208     0.007270
+Add:            16176.2     0.005151     0.004670     0.006627
+Triad:          36041.5     0.004630     0.002096     0.006079
 -------------------------------------------------------------
-Solution Validates: avg error less than 1.000000e-13 on all three arrays
+Solution Validates: avg error less than 1.000000e-006 on all three arrays
 -------------------------------------------------------------
+
+-------------------------------------------------------------
+Without SW Opts
+-------------------------------------------------------------
+
+-------------------------------------------------------------
+STREAM version $Revision: 5.10 $
+-------------------------------------------------------------
+This system uses 4 bytes per array element.
+-------------------------------------------------------------
+Array size = 6295081 (elements), Offset = 0 (elements)
+Memory per array = 24.0 MiB (= 0.0 GiB).
+Total memory required = 72.0 MiB (= 0.1 GiB).
+Each kernel will be executed 7 times.
+ The *best* time for each kernel (excluding the first iteration)
+ will be used to compute the reported bandwidth.
+-------------------------------------------------------------
+Number of Threads requested = 8
+Number of Threads counted = 8
+-------------------------------------------------------------
+Your clock granularity/precision appears to be 115 microseconds.
+Each test below will take on the order of 3866 microseconds.
+   (= 33 clock ticks)
+Increase the size of the arrays if this shows that
+you are not getting at least 20 clock ticks per test.
+-------------------------------------------------------------
+WARNING -- The above is only a rough guideline.
+For best results, please be sure you know the
+precision of your system timer.
+-------------------------------------------------------------
+Function    Best Rate MB/s  Avg time     Min time     Max time
+Copy:           50462.7     0.003549     0.000998     0.004742
+Scale:          50465.6     0.003269     0.000998     0.005182
+Add:            16231.7     0.006222     0.004654     0.007544
+Triad:          16457.7     0.004966     0.004590     0.006253

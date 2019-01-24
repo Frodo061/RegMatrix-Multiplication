@@ -15,6 +15,8 @@
 
 \usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
 \usepackage{booktabs} % Horizontal rules in tables
+\usepackage{multirow}
+
 
 \usepackage{enumitem} % Customized lists
 
@@ -29,7 +31,14 @@
 
 \usepackage{titling} % Customizing the title section
 
-\usepackage{hyperref} % For hyperlinks in the PDF
+\usepackage{amssymb} % For symbols in the equatinos
+
+\usepackage{biblatex} %Imports biblatex package
+\usepackage{csquotes}
+\addbibresource{bibliography.bib} %Import the bibliography file
+
+\usepackage{graphicx} % For images
+\graphicspath{ {images/} }
 
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION
@@ -37,21 +46,25 @@
 
 \setlength{\droptitle}{-4\baselineskip} % Move the title up
 
-\title{Article Title} % Article title
+\title{Matrix-matrix Multiplication \\
+    \large Characterisation and Analysis of the Performance On a Computing Platform} % Article title
+
 \author{
 João Alves\\[1ex] % Your name
 \normalsize University of Minho \\ % Your institution
-\normalsize \href{mailto:a77070@alunos.uminho.pt}{a77070@alunos.uminho.pt} % Your email address
+\normalsize a77070@alunos.uminho.pt % Your email address
 \and % Uncomment if 2 authors are required, duplicate these 4 lines if more
 Filipe Silva\\[1ex] % Second author's name
 \normalsize University of Minho \\ % Second author's institution
-\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
+\normalsize a77284@alunos.uminho.pt % Second author's email address
 }
 \date{} % Leave empty to omit a date
 \renewcommand{\maketitlehookd}{%
 \begin{abstract}
 
-\blindtext
+\textbf{
+The goal of this project is to study the Roofline Model methodology, on the characterization of the performance bottlenecks, code profiling and it's performance analysis, applying it to the matrix multiplication algorithm. The computing platform we worked with was a multicore processor, of the Universidade do Minho cluster SeARCH, more precisely the SeARCH 662 nodes.
+}
 
 \end{abstract}
 }
@@ -69,105 +82,258 @@ Filipe Silva\\[1ex] % Second author's name
 
 \section{Introduction}
 
-\blindtext % Dummy text
+Nowadays, nearly almost desktop and server computers follow the same design. That is, besides the variations on the instruction sets, all of them use caches, pipelining, superscalar instruction issue, and out-of-order execution \cite{roofline}.
 
-\section{Hardware Platform Characterisation}
+However, switching to multicore means that processors are a lot more diverse in terms of architecture and implementations, depending on the manufacturers which often ofter multiple products differing mainly on the number of cores.
 
-\blindtext
+So, it becomes the job of the programmer to better understand the different aspects of the platform's architecture. Therefore, were designed models to provide insights into the performance of the applications developed.
+
+In this paper, we will focus on the performance of the matrix multiplication algorithm on a computing platform. Starting by developing a model to characterise the hardware environment, analyse bottlenecks and further study on the optimizations of the algorithm.
+
+%\section{Hardware Platform Characterisation}
+%
+%\blindtext
 
 \section{PAPI Performance Counters}
 
-The PAPI project successfully implements a cross-platform interface of performance hardware counters that may provide information on how to reduce computational bottlenecks. However, in order to get relevant data from the API to our case study, we had to select a few of these counters. So, to list all the available counters on the 662 nodes (PAPI version 5.5.0), we used \emph{papi\_avail} and chose the following:
+The PAPI project successfully implements a cross-platform interface of performance hardware counters, that may provide information on how to reduce computational bottlenecks. However, in order to get relevant data from the API to our case study, we had to select a few of these events. So, to list all the available counters on the 662 nodes (PAPI version 5.5.0), we used \emph{papi\_avail} and chose the following:
 
 \begin{itemize}
     \item \textbf{PAPI\_LD\_INS} Load instructions;
     \item \textbf{PAPI\_L1\_DCM} Level 1 data cache misses;
-    \item \textbf{PAPI\_L2\_TCM} Level 2 cache misses;
+    \item \textbf{PAPI\_L3\_DCR} Level 3 data cache reads;
     \item \textbf{PAPI\_L3\_TCM} Level 3 cache misses;
+    \item \textbf{PAPI\_L3\_TCA} Level 3 total cache accesses;
     \item \textbf{PAPI\_FP\_OPS} Floating point operations;
     \item \textbf{PAPI\_VEC\_SP} Single precision vector/SIMD instructions.
 \end{itemize}
 
-Counting these events allows us to induce certain values for important metrics, that affect the algorithm's performance. These are going to be discussed in later sections, but some of them include the miss rate for a certain level of cache, the number of RAM accesses per instruction, the of floating point operations executed and the number of SIMD instructions, which is crucial when we are trying to achieve the maximum performance, on superscalar architectures.
+Counting these events allows us to induce certain values for important metrics, that affect the algorithm's performance. These are going to be discussed in later sections, but some of them include the miss rate for a certain level of cache, the number of RAM accesses per instruction, the floating point operations executed and the number of SIMD instructions, which is crucial when we are trying to achieve the maximum performance, on superscalar architectures.
 
 \section{Matrix Dot-Product Algorithm Analysis}
 
-Following the analysis and the characterisation of the hardware environment, the case study that we will be applying these modeling concepts consists of the dot product of two square matrices, where:
+Following the analysis and the characterisation of the hardware environment, the case study that we will be applying these modelling concepts consists of the dot product of two square matrices, where:
 
 $$C = A \times B$$
 
 Being \textbf{A} and \textbf{B} two square matrices of size $\textbf{N} \times \textbf{N}$ and \textbf{C} the result of the dot product between them.
 
-\section{Methods}
+\subsection{First Implementations}
 
-Maecenas sed ultricies felis. Sed imperdiet dictum arcu a egestas. 
-\begin{itemize}
-\item Donec dolor arcu, rutrum id molestie in, viverra sed diam
-\item Curabitur feugiat
-\item turpis sed auctor facilisis
-\item arcu eros accumsan lorem, at posuere mi diam sit amet tortor
-\item Fusce fermentum, mi sit amet euismod rutrum
-\item sem lorem molestie diam, iaculis aliquet sapien tortor non nisi
-\item Pellentesque bibendum pretium aliquet
-\end{itemize}
-\blindtext % Dummy text
+The first implementations of the algorithm followed the standard three nested loop for the indexes \emph{i}, \emph{j} and \emph{k}, where \emph{i} represents the rows and \emph{j} represent the columns of the matrices.
 
-Text requiring further explanation\footnote{Example footnote}.
+The main changes occur when the order of the indexes is changed, producing different accesses patterns to the elements of the matrices.
 
-%------------------------------------------------
+However, when the accesses are by column, there will be a negative impact on the performance, because the memory accesses are performed row-wise, during the execution of the algorithm.
 
-\section{Results}
+This applies to the \textbf{IJK} version since the result stored in the \textbf{C} matrix is computed with a line of the matrix \textbf{A} and a column of the matrix \textbf{B}.  To address this issue, we transposed the matrix \textbf{B} to correct the access, now being row-wise.
 
-\begin{table}
-\caption{Example table}
-\centering
-\begin{tabular}{llr}
-\toprule
-\multicolumn{2}{c}{Name} \\
-\cmidrule(r){1-2}
-First name & Last Name & Grade \\
-\midrule
-John & Doe & $7.5$ \\
-Richard & Miles & $2$ \\
-\bottomrule
-\end{tabular}
-\end{table}
+This also occurs for the \textbf{JKI} version of the computation, since the result is iterated column-wise. So, as seen above, we changed the solution to perform the transposition of the matrices \textbf{A} and \textbf{B}, before the multiplication part of it, and \textbf{C} in the end.
 
-\blindtext % Dummy text
+\subsection{Input Data Structure}
 
-\begin{equation}
-\label{eq:emc}
-e = mc^2
+In order to analyse the code execution on a single core of the multicore \emph{662} node, four different data set sizes where defined, based on equation \ref{eq:1}, to fit on each cache level. It was also taken into consideration choosing powers of two, from the range of values obtained by that equation. The results can be found in table \ref{tab:datasetsizes}.
+
+\begin{equation} \label{eq:1}
+    Cache Size \geqslant size^{2} \times sizeof(float) \times 3
 \end{equation}
 
-\blindtext % Dummy text
+\begin{table}[ht]
+\begin{tabular}{|l|l|}
+\hline
+Fitting Level of The Hierarchy & Size                            \\ \hline
+L1 Cache                       & 32 x 32     \\ \hline
+L2 Cache                       & 128 x 128   \\ \hline
+L3 Cache                       & 1024 x 1024 \\ \hline
+External RAM                   & 2048 x 2048 \\ \hline
+\end{tabular}
+\caption{Data Set sizes.}
+\label{tab:datasetsizes}
+\end{table}
 
-%------------------------------------------------
+For each execution of an algorithm was performed a validation test, to ensure the implementation was correct. This was accomplished by verifying if all resulting columns of the product $\textbf{A} \times \textbf{B}$ had the same values. However, when measuring the execution time, this step wasn't taken into count.
 
-\section{Discussion}
+\subsection{Execution Time Measurements}
 
-\subsection{Subsection One}
+Having implemented all the of the solutions discussed above and selected the sizes for the input data sets, we measured the execution time, for each of the algorithms.
 
-A statement requiring citation \cite{Figueredo:2009dg}.
-\blindtext % Dummy text
+So to have results more reproducible, we applied a k-best scheme with $K = 3$ and a 5\% tolerance, every 8 executions. The results obtained for each of the dot product implementations and its respective input size can be seen in table \ref{tab:firsttimeresults}.
 
-\subsection{Subsection Two}
+\begin{table}
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l|l|l|l|l|} 
+\hline
+                                 & \textbf{32 x 32} & \textbf{128 x 128} & \textbf{1024 x 1024} & \textbf{2048 x 2048}  \\ 
+\hline
+\textbf{IJK~ ~ ~ ~ ~}            & 0.037            & 2.820~ ~ ~ ~ ~     & 2972.836~ ~ ~ ~ ~    & 23635.89~ ~ ~ ~ ~     \\ 
+\hline
+\textbf{IJK Transposed}          & 0.037~ ~ ~ ~ ~   & 2.30~ ~ ~ ~ ~      & 1139.97~ ~ ~ ~ ~     & 9067.64~ ~ ~ ~ ~      \\ 
+\hline
+\textbf{IKJ~ ~ ~ ~ ~}            & 0.033~ ~ ~ ~ ~   & 1.91~ ~ ~ ~ ~      & 970.51~ ~ ~ ~ ~      & 7732.51~ ~ ~ ~ ~      \\ 
+\hline
+\textbf{JKI~ ~ ~ ~ ~}            & 0.046~ ~ ~ ~ ~   & 7.096~ ~ ~ ~ ~     & 17431.63~ ~ ~ ~ ~    & 80917.90~ ~ ~ ~ ~     \\ 
+\hline
+\textbf{JKI Transposed~ ~ }~ ~ ~ & 0.036~ ~ ~ ~ ~   & 1.980~ ~ ~ ~ ~     & 993.18~ ~ ~ ~ ~      & 7851.90~ ~ ~ ~ ~      \\
+\hline
+\end{tabular}
+}
+\caption{First implementations execution time.}
+\label{tab:firsttimeresults}
+\end{table}
 
-\blindtext % Dummy text
+Looking at the results, we perceived that the \textbf{JKI} implementation performed the worst for all sizes of the matrices, justifying the previous statements about the inefficiency of the column-wise memory accesses. Although the differences are more perceptible for larger sizes of the matrices, even for the \textbf{32x32} it got the worst results, like we predicted. Also, we can recognise that the \textbf{IKJ} implementation performed the best for all of the sizes, although the differences are more perceptible for larger input matrices.
+
+Regarding the \textbf{32x32} matrix size, there is not much of a difference between all of the execution times, even so, we verify what was stated above.
+
+For the \textbf{128x128} sizes, only the \textbf{JKI} implementation stands out for being so much higher than the others. Because this still is a smaller size, the differences between the remaining, aren't as noticeable as well.
+
+Now for the larger size of \textbf{1024x1024}, the contrast between the solutions that used column-wise access from the ones that implemented it row-wise is more perceptible. Verifying that the \textbf{IJK} and \textbf{JKI} benefited from transposing the matrices.
+
+Finally, for the bigger dimension of \textbf{2048x2048}, the conclusions stated above are even more evident.
+
+\section{Analysis of the Behaviour of the Algorithms}
+
+After measuring the execution times, we analysed the performance of the main memory accesses, the number of floating point operations and the cache behaviour, for each of the dot product implementations. These are going to be discussed in the next subsections.
+
+\subsection{RAM Behaviour}
+
+Considering that the 662 nodes have a 64 byte bus width, we conclude that every access to the RAM retrieves 16 floats to the cache.
+
+Since the algorithm is implemented with three nested loops, each iterating N times and every iteration reaches an element of A, B and C, when the access pattern is row-wise, we estimate one RAM access per 16 iterations, per matrix. That is considering that a line of cache holds 16 floats.
+
+However, this does not apply to the access pattern being column-wise so, for the purpose of estimating, we assumed that for every load of a value from a column, we access the RAM.
+
+Taking these into consideration, we developed the following formulas to estimate the number of RAM accesses of a matrix, for each pattern:
+
+$$\textbf{transposing a matrix} = 2N^{2}$$
+$$\textbf{row-wise} = \frac{N^{2}}{L}$$
+$$\textbf{column-wise} = N^{2}$$
+
+Where $N \times N$ is the size of the matrix and $L$ is the number of floats that fit in a line of cache. Finally, the values for each implementation we designed the following formulas:
+
+$$\textbf{IJK} = \frac{N^{2}}{L} + N^{2} + \frac{N^{2}}{L}$$
+$$\textbf{IJKTr} = 2N^{2} + \frac{N^{2}}{L} + \frac{N^{2}}{L} + \frac{N^{2}}{L}$$
+$$\textbf{IKJ} = \frac{N^{2}}{L} + \frac{N^{2}}{L} + \frac{N^{2}}{L}$$
+$$\textbf{JKI} = N^{2} + N^{2} + N^{2}$$
+$$\textbf{JKITr} = 2N^{2} + 2N^{2} + 2N^{2} + \frac{N^{2}}{L} + \frac{N^{2}}{L} + \frac{N^{2}}{L}$$
+
+Having estimated these values, these were then obtained using the PAPI counters \textbf{PAPI\_L3\_TCM} and \textbf{PAPI\_TOT\_INS}, giving us the following results:
+
+\begin{table}[ht]
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+                        & \textbf{32 x 32} & \textbf{128 x 128} & \textbf{1024 x 1024} & \textbf{2048 x 2048} \\ \hline
+\textbf{IJK}            & 0,001803311      & 0,0001098          & 3,8972E-05           & 1,98544E-05          \\ \hline
+\textbf{IJK Transposed} & 0,001573423      & 0,000141863        & 4,18087E-05          & 1,87154E-05          \\ \hline
+\textbf{IKJ}            & 0,001353602      & 0,000132935        & 1,71935E-05          & 8,84091E-06          \\ \hline
+\textbf{JKI}            & 0,002153034      & 7,40155E-05        & 8,05869E-06          & 0,0005191            \\ \hline
+\textbf{JKI Transposed} & 0,002160826      & 0,000164294        & 6,38714E-05          & 5,21549E-05          \\ \hline
+\end{tabular}%
+}
+\caption{RAM accesses per instruction.}
+\label{tab:ramresults}
+\end{table}
+
+Finally, in order to measure the number of bytes transferred to and from the main memory we multiplied the each of the results obtained above by 64 since it is the number of bytes transferred on every RAM access. Doing this, we obtained the next results:
+
+\begin{table}
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l|l|l|l|l|}
+\hline
+                        & \textbf{32 x 32} & \textbf{128 x 128} & \textbf{1024 x 1024} & \textbf{2048 x 2048} \\ \hline
+\textbf{IJK}            & 7648             & 33856              & 12598528             & 50425248             \\ \hline
+\textbf{IJK Transposed} & 6720             & 38240              & 5756736              & 20594112             \\ \hline
+\textbf{IKJ}            & 5696             & 35744              & 2372224              & 9749216              \\ \hline
+\textbf{JKI}            & 9376             & 41472              & 12598080             & 4109140608           \\ \hline
+\textbf{JKI Transposed} & 9120             & 44160              & 8804032              & 57449952             \\ \hline
+\end{tabular}%
+}
+\caption{Data transferred to/from the RAM.}
+\label{tab:ramtrafficresults}
+\end{table}
+
+\subsection{Floating Point Operations Analysis}
+
+Next, in the behaviour analysis of the implementations, we tried to estimate the number of floating point operations executed during each dot product implementation.
+
+Since every algorithm does two operations every iteration, we predict that all implementations are going to execute $2 \times N^{3}$ operations. To verify our estimates, we tested this for the various sizes of input, giving the following results:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Size} & \textbf{FP Operations} \\ \hline
+32 x 32       & 66267                  \\ \hline
+128 x 128     & 4817848                \\ \hline
+1024 x 1024   & 5051118689             \\ \hline
+2048 x 2048   & 39683603954            \\ \hline
+\end{tabular}
+\caption{Number of floating point operations executed.}
+\label{tab:fpresults}
+\end{table}
+
+%missing the plot of the roofline
+
+\subsection{Cache Behaviour}
+
+Finally, in order to have some insights into the improvements of transposing a matrix on the cache behaviour, we determined the miss rate for each cache level on implementations with and without transposing the matrices. We used the following PAPI counters and formulas for each level:
+
+$$\textbf{L1 MR} = PAPI\_L1\_DCM / PAPI\_LD\_INS$$
+$$\textbf{L2 MR} = PAPI\_L2\_TCM / PAPI\_L1\_DCM$$
+$$\textbf{L3 MR} = PAPI\_L3\_TCM / PAPI\_L2\_DCM$$
+
+\begin{table}[ht]
+\centering
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l|l|l|l|l|l|}
+\hline
+                                     & \textbf{} & \textbf{32 x 32} & \textbf{128 x 128} & \textbf{1024 x 1024} & \textbf{2048 x 2048} \\ \hline
+\multirow{3}{*}{\textbf{Normal}}     & L1 MR(\%) & 0,319675799      & 50,84354022        & 50,05148565          & 50,06053531          \\ \cline{2-6} 
+                                     & L2 MR(\%) & 47,28158812      & 0,212728108        & 99,96520818          & 99,65526762          \\ \cline{2-6} 
+                                     & L3 MR(\%) & 94,86503453      & 10,82904941        & 0,018310724          & 0,009194196          \\ \hline
+\multirow{3}{*}{\textbf{Transposed}} & L1 MR(\%) & 0,309776054      & 3,248650954        & 3,18084901           & 3,15465252           \\ \cline{2-6} 
+                                     & L2 MR(\%) & 41,95045334      & 0,616594482        & 3,146355414          & 2,798500911          \\ \cline{2-6} 
+                                     & L3 MR(\%) & 93,47826087      & 71,45725973        & 4,125660755          & 1,939631658          \\ \hline
+\end{tabular}
+}
+\caption{Miss rates of the \textbf{IJK} implementation.}
+\label{tab:missrates}
+\end{table}
+
+%Concluir
+
+%2.9
+
+\section{Optimizations}
+
+After analysing the previous algorithms, it is time to optimise the performance of them by taking full advantage of the resources available.
+
+We were able to see that interchanging the loops made the code access the data in the order in which they are stored. This way we improved the cache performance without affecting the number of instructions executed.
+
+Finally, there are other optimisations we can make to enhance the execution of the algorithm, that are going to be discussed in the next sections.
+
+\subsection{Blocking}
+
+In order to maximise the accesses to the data loaded into the cache, before it is replaced, we applied a technique known as blocking. This optimisation consists of, instead of operating on entire rows or columns of the matrices, dividing them into squared submatrices and operating over them. This will allow us to reuse more of the elements, before the need to access the main memory.
+
+With better use of the cache, we expect the execution time to decrease for the data sets that were requiring more accesses to the RAM.
+
+\subsection{Vectorization}
+
+Since the machine we used (\textit{662 SeARCH}) featured AVX the vectorization could make the code faster so, after Blocking, we added vectorization to the code, since the code wasn't vectorized with the compiler flags a flag was added to the code to force the code vectorization by the compiler.
+
+
+%\subsection{OpenMP}
+
 
 %----------------------------------------------------------------------------------------
 %	REFERENCE LIST
 %----------------------------------------------------------------------------------------
 
-\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
-
-\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
-Figueredo, A.~J. and Wolf, P. S.~A. (2009).
-\newblock Assortative pairing and life history strategy - a cross-cultural
-  study.
-\newblock {\em Human Nature}, 20:317--330.
- 
-\end{thebibliography}
+\printbibliography
 
 %----------------------------------------------------------------------------------------
 

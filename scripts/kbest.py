@@ -8,7 +8,7 @@ import sys
 
 
 	
-file_object  = open("kbest_input.txt", "r")
+file_object  = open("var/kbest_input.txt", "r")
 
 texto=file_object.read()
 

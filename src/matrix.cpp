@@ -92,6 +92,14 @@ void matrixMultIndexOrder1(float *ma, float *mb, float *mc, unsigned n) {
     }
 }
 
+void multiplicationIKJ (float** a, float** b, float** c, int size) {
+	int i, k, j;
+	for (i = 0; i < size; ++i)
+		for (k = 0; k < size; ++k)
+			for (j = 0; j < size; ++j)
+				c[i][j] += a[i][k] * b[k][j];
+}
+
 //Index Order i-k-j Blocks
 void matrixMultIndexOrder1Bl(float *ma, float *mb, float *mc, unsigned n) {
     for(unsigned ii = 0; ii < n; ii += BLOCKSIZE) {
