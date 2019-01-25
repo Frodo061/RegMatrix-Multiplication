@@ -7,9 +7,9 @@
 using std::cout;
 using std::endl;
 
-float *ma, *mb, *mc;
+float **ma, **mb, **mc;
 
-void (*dp_func)(float *, float *, float *, unsigned);
+void (*dp_func)(float **, float **, float **, unsigned);
 
 int main(int argc, char *argv[]) {
 
@@ -56,15 +56,20 @@ int main(int argc, char *argv[]) {
         utils_init_matrices(&ma, &mb, &mc, size);
         clearCache();    
         utils_start_timer();
+        #ifdef PAPI
+        cout << "Test" << endl;
         utils_start_papi(type);
+        #endif
         dp_func(ma, mb, mc, size);
+        #ifdef PAPI
         utils_stop_papi(i, type);
+        #endif
         utils_stop_timer();
         if(!validate(ma, mb, mc, size)) {
             cout << "Matrix Multiplication failed: algorithm is incorrect" << endl;
             return -1;
         }
-        utils_clean_matrices(&ma,&mb,&mc);
+        utils_clean_matrices(ma,mb,mc);
     }
 
     utils_results(type);

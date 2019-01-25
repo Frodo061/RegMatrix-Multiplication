@@ -5,7 +5,10 @@
 #include <mm_malloc.h>
 #include <vector>
 #include <string.h>
+
+#ifdef PAPI
 #include <papi.h>
+#endif
 
 using namespace std;
 
@@ -15,10 +18,13 @@ vector<long long unsigned> *time_measurement = new vector<long long unsigned>();
 long long unsigned initial_time;
 double clearcache [30000000];
 timeval t;
+
+#ifdef PAPI
 long long **values;
 int *events;
 int numEvents;
 int eventSet = PAPI_NULL;
+#endif
 
 void clearCache (void) {
 	for (unsigned i = 0; i < 30000000; ++i)
@@ -36,17 +42,25 @@ void utils_stop_timer(void) {
 	time_measurement->push_back(final_time - initial_time);
 }
 
-int utils_init_matrices(float **a, float **b, float **c, int N) {
+int utils_init_matrices(float ***a, float ***b, float ***c, int N) {
     int i;
     const int total_elements = N * N;
-    *a = (float*) _mm_malloc(N*N*sizeof(float), 32);
-    *b = (float*) _mm_malloc(N*N*sizeof(float), 32);
-    *c = (float*) _mm_malloc(N*N*sizeof(float), 32);
-    for (i = 0; i < total_elements; i++)
+    *a = (float**) _mm_malloc(N*sizeof(float *), 32);
+    *b = (float**) _mm_malloc(N*sizeof(float *), 32);
+    *c = (float**) _mm_malloc(N*sizeof(float *), 32);
+    for(i = 0; i < N; i++){
+        (*a)[i] = (float *) _mm_malloc(N*sizeof(float *), 32);
+        (*b)[i] = (float *) _mm_malloc(N*sizeof(float *), 32);
+        (*c)[i] = (float *) _mm_malloc(N*sizeof(float *), 32);
+    }
+    for (i = 0; i < N; i++)
     {
-        (*a)[i] = ((float) rand()) / ((float) RAND_MAX);
-        (*b)[i] = 1;
-        (*c)[i] = 0;
+        for(int j = 0; j < N; j++)
+        {
+            (*a)[i][j] = ((float) rand()) / ((float) RAND_MAX);
+            (*b)[i][j] = 1;
+            (*c)[i][j] = 0;
+        }
     }
     return 1;
 }
@@ -56,6 +70,7 @@ void utils_setup_papi(int repetitions, const char *type) {
     {
         return;
     }
+    #ifdef PAPI
     else if (!strcmp(type, "l1mr"))
     {
         numEvents = 2;
@@ -97,6 +112,7 @@ void utils_setup_papi(int repetitions, const char *type) {
     PAPI_library_init(PAPI_VER_CURRENT);
     PAPI_create_eventset(&eventSet);
     PAPI_add_events(eventSet, events, numEvents); /* Start the counters */
+    #endif
 }
 
 void utils_results(const char *type) {
@@ -108,6 +124,7 @@ void utils_results(const char *type) {
             double tm = time_measurement->at(i) / (double)1000;
             cout << "Execution Time;" << tm << endl;
         }
+	    #ifdef PAPI
         else if (!strcmp(type, "l1mr"))
         {
             cout << values[i][0] <<";"<<values[i][1] << endl;
@@ -128,6 +145,7 @@ void utils_results(const char *type) {
         {
             cout << values[i][0] << endl;
         }
+	    #endif
     }
 }
 
@@ -141,7 +159,9 @@ int utils_clean_matrices(float **a, float **b, float **c){
     return 0;
 }
 
+#ifdef PAPI
 void utils_start_papi(const char *type) {
+    cout << "Test" << endl;
     if (strcmp(type, "time"))
         PAPI_start(eventSet);        
 }
@@ -150,3 +170,4 @@ void utils_stop_papi(int rep, const char *type) {
     if (strcmp(type, "time"))
         PAPI_stop(eventSet, values[rep]);
 }
+#endif
