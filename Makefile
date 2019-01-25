@@ -2,14 +2,12 @@
 
 BIN_NAME = main
 
-ifndef CXX
-CXX = icpc
-endif
+CXX := icpc
 
 ifeq ($(CXX),icpc)
-	CXXFLAGS = -O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+	CXXFLAGS = -O3 -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
 else
-	CXXFLAGS = -O3 -g -fopt-info-all=build/report.fopt -lpapi -fopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib #-O3 -Wall -Wextra -std=c++11 -Wno-unused-parameter -fopt-info-vec-all=build/report.fopt -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+	CXXFLAGS = -O3 -g -std=c++11 -fopt-info-vec-missed=build/report.fopt -fopenmp -Wunknown-pragmas
 endif
 
 # CXX = g++
@@ -21,6 +19,10 @@ endif
 
 ifeq ($(VEC),no)
 	CXXFLAGS += -no-vec
+endif
+
+ifeq ($(PAPI),yes)
+	CXXFLAGS += -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DPAPI
 endif
 
 ifeq ($(DOT_PR_1),yes)
