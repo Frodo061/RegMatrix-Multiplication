@@ -32,6 +32,25 @@ void multMat(float *a,float *b, float *c, int N){
     }
 }
 
+int validate(float *c, int n) {
+    //all resulting columns should have the same values
+    for(unsigned i = 0; i < n*n; i += n) {
+        float tmp = c[i];
+        for(unsigned j = 0; j < n && result; j++) {
+            if(c[i + j] != tmp) return 0;
+        }
+    }
+    return 1;
+}
+
+void checker(float *c, int N){
+    if (cudaSuccess==cudaGetLastError() && validate(c,N)){
+        cout << "NO ERROR" << endl;
+    }
+    else{
+        cout << "There was an error" << endl;
+    }
+}
 void stencil(float *a, float *b, float *c, int N){
     float *devA,*devB, *devC;
     int NQ = N*N;
@@ -74,5 +93,6 @@ int main (int argc, char** argv) {
 	float *a,*b,*c;
     newMatrices(&a,&b,&c,N);
     stencil(a,b,c,N);
+    checker(c,N);
 	return 0;
 }
