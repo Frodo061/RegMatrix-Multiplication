@@ -1,0 +1,35 @@
+Index Order: i-j-k Transposed with Blocking
+
+Size of matrix 2048 x 2048
+Execution Time;3625,13
+Execution Time;3626,1
+Execution Time;3618,47
+Execution Time;3540,42
+Execution Time;3531,58
+Execution Time;3533,47
+Execution Time;3535,76
+Execution Time;3533,29
+
+Index Order: i-k-j with Blocking
+
+Size of matrix 2048 x 2048
+Execution Time;3771,42
+Execution Time;3771,22
+Execution Time;3763,61
+Execution Time;3777,48
+Execution Time;3763,99
+Execution Time;3769,93
+Execution Time;3773,09.
+Execution Time;3771,64
+
+Index Order: j-k-i Transposed with Blocking
+
+Size of matrix 2048 x 2048
+Execution Time;3886,22
+Execution Time;3888,9
+Execution Time;3891,58
+Execution Time;3887,19
+Execution Time;3883,45
+Execution Time;3888,17
+Execution Time;3871
+Execution Time;3880,34

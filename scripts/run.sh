@@ -8,23 +8,19 @@
 
 cd /home/a77070/projects/aa/WorkAssignment
 
-echo "Setting up the environment..."
+source ~/intel/parallel_studio_xe_2019/compilers_and_libraries_2019/linux/bin/compilervars.sh intel64
 
-module load papi/5.5.0
-module load gcc/5.3.0
-
-source /share/apps/intel/parallel_studio_xe_2019/compilers_and_libraries_2019/linux/bin/compilervars.sh intel64
-
-cat /proc/cpuinfo > tmp/cpuinfo.txt
-papi_avail > tmp/papi_counters.txt
-
-export VEC=no
+#cat /proc/cpuinfo > tmp/cpuinfo.txt
+#papi_avail > tmp/papi_counters.txt
 
 #'DOT_PR_1' 'DOT_PR_1_TR' 'DOT_PR_2' 'DOT_PR_3' 'DOT_PR_3_TR' 'DOT_PR_1_BL' 'DOT_PR_2_BL' 'DOT_PR_3_BL'
-algs=( 'DOT_PR_3_TR' )
+algs=( 'DOT_PR_1_BL' 'DOT_PR_2_BL' 'DOT_PR_3_BL' )
 
 #32 128 1024 2048
-sizes=( 32 128 1024 2048 )
+sizes=( 2048 )
+
+#'l1mr' 'l2mr' 'l3mr' 'flops' 'vflops' 'time'
+options=( 'time' )
 
 for alg in ${algs[@]}
 do
@@ -38,7 +34,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in 
             do
                 ./bin/main $size $type
             done
@@ -54,7 +50,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -70,7 +66,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -86,7 +82,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -102,7 +98,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -118,7 +114,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -134,7 +130,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done
@@ -150,7 +146,7 @@ do
         do
             echo ""
             echo Size of matrix $size x $size
-            for type in "l1mr" "l2mr" "l3mr" "flops" "vflops" "time"
+            for type in ${options[@]}
             do
                 ./bin/main $size $type
             done

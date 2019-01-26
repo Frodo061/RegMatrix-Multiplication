@@ -7,7 +7,9 @@
 using std::cout;
 using std::endl;
 
-float **ma, **mb, **mc;
+float **ma __attribute__((aligned(16)));
+float **mb __attribute__((aligned(16)));
+float **mc __attribute__((aligned(16)));
 
 void (*dp_func)(float **, float **, float **, unsigned);
 
@@ -20,15 +22,6 @@ int main(int argc, char *argv[]) {
 
     unsigned size = std::stoul(argv[1]);
     const char *type=strdup(argv[2]);
-
-    #if defined(DOT_PR_1_BL) || defined(DOT_PR_2_BL) || defined(DOT_PR_3_BL)
-    if(argc == 4) {
-        #undef BLOCKSIZE
-        #define BLOCKSIZE atoi(argv[3])    
-    } else {
-        cout << "No size for blocks was provided! Using default block size of 1" << endl;
-    }
-    #endif
     
     #ifdef DOT_PR_1
     dp_func = &regularMatrixMult;

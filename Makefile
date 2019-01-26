@@ -5,7 +5,7 @@ BIN_NAME = main
 CXX := icpc
 
 ifeq ($(CXX),icpc)
-	CXXFLAGS = -O3 -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi
+	CXXFLAGS = -O3 -std=c++11 -Wno-unused-parameter -qopt-report=3 -qopenmp -static-libstdc++
 else
 	CXXFLAGS = -O3 -g -std=c++11 -fopt-info-vec-missed=build/report.fopt -fopenmp -Wunknown-pragmas
 endif
