@@ -1,6 +1,6 @@
 #include <iostream>
 
-#define BLOCKSIZE 1
+#define BLOCKSIZE 16
 
 void fillMatrixA (float **ma, unsigned n);
 void fillMatrixB (float **mb, unsigned n);

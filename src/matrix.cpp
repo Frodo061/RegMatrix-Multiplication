@@ -74,7 +74,7 @@ void regularMatrixMultBl(float **ma, float **mb, float **mc, unsigned n){
     for( unsigned br = 0; br < n; br+=BLOCKSIZE)
         for( unsigned bc = 0; bc < n; bc+=BLOCKSIZE)
             for( unsigned i = 0; i < n; i++)
-                for( unsigned j = br; j < br+BLOCKSIZE; j++) 
+                for( unsigned j = br; j < br+BLOCKSIZE; j++)
                     #pragma ivdep
                     for( unsigned k = bc; k < bc+BLOCKSIZE; k++)
                         mc[i][j] += ma[i][k] * mb[j][k];
@@ -93,11 +93,12 @@ void matrixMultIndexOrder1(float **ma, float **mb, float **mc, unsigned n) {
 }
 
 //Index Order i-k-j Blocks
-void matrixMultIndexOrder1Bl(float **ma, float **mb, float **mc, unsigned n) {
+void matrixMultIndexOrder1Bl(float **__restrict__ ma, float **__restrict__ mb, float **__restrict__ mc, unsigned n) {
     for(unsigned ii = 0; ii < n; ii += BLOCKSIZE) {
         for(unsigned jj = 0 ; jj < n; jj += BLOCKSIZE) {
             for(unsigned i = 0; i < n; i++) {
                 for(unsigned k = ii; k < ii + BLOCKSIZE; k++){
+                    #pragma vector always
                     for(unsigned j = jj; j < jj + BLOCKSIZE; j++){
                         mc[i][j] += ma[i][k] * mb[k][j];
                     }
@@ -142,7 +143,8 @@ void matrixMultIndexOrder2Bl(float **ma,float **mb,float **mc, unsigned n) {
     for( unsigned br = 0; br < n; br+=BLOCKSIZE)
         for( unsigned bc = 0; bc < n; bc+=BLOCKSIZE)
             for( unsigned j = 0; j < n; j++)
-                for( unsigned k = br; k < br+BLOCKSIZE; k++) 
+                for( unsigned k = br; k < br+BLOCKSIZE; k++)
+                    #pragma ivdep
                     for( unsigned i = bc; i < bc+BLOCKSIZE; i++)
                         mc[j][i] += ma[k][i] * mb[j][k];
 
