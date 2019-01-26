@@ -17,8 +17,7 @@ void stopStopWatch () {
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	float time = 0;
-	cudaEventElapsedTime(&time, start, stop);
-	cout << time << " ms." << endl;
+    cudaEventElapsedTime(&time, start, stop);
 }
 
 __global__
@@ -43,14 +42,6 @@ int validate(float *c, int n) {
     return 1;
 }
 
-void checker(float *c, int N){
-    if (cudaSuccess==cudaGetLastError() && validate(c,N)){
-        cout << "NO ERROR" << endl;
-    }
-    else{
-        cout << "There was an error" << endl;
-    }
-}
 void stencil(float *a, float *b, float *c, int N){
     float *devA,*devB, *devC;
     int NQ = N*N;
@@ -58,20 +49,24 @@ void stencil(float *a, float *b, float *c, int N){
     cudaMalloc((void**) &devB, NQ * sizeof(float));
     cudaMalloc((void**) &devC, NQ * sizeof(float));
     
-    startStopWatch();
 	cudaMemcpy(devA,a,NQ*sizeof(float),cudaMemcpyHostToDevice);	
 	cudaMemcpy(devB,b,NQ*sizeof(float),cudaMemcpyHostToDevice);	
-    stopStopWatch();
     dim3 dimGrid(N,N);
     dim3 dimBlock(1,1);
     startStopWatch();
     multMat<<<dimGrid,dimBlock>>>(devA,devB,devC,N);
     stopStopWatch();
-    startStopWatch();
     cudaMemcpy(c,devC,NQ*sizeof(float),cudaMemcpyDeviceToHost);
-    stopStopWatch();
     cudaFree(devA);
     cudaFree(devB);
+    if (cudaSuccess==cudaGetLastError() && validate(c,N)){
+    	cout << time << " ms." << endl;
+    }
+    else{
+        cout << "Matrix Multiplication failed: algorithm is incorrect" << endl;
+        cudaFree(devC);
+        exit(-1);
+    }
     cudaFree(devC);
 }
 
