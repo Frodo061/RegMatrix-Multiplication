@@ -1,35 +1,179 @@
 Index Order: i-j-k Transposed with Blocking
 
 Size of matrix 2048 x 2048
-Execution Time;3625,13
-Execution Time;3626,1
-Execution Time;3618,47
-Execution Time;3540,42
-Execution Time;3531,58
-Execution Time;3533,47
-Execution Time;3535,76
-Execution Time;3533,29
+9184.73
+9183.48
+9184.77
+9173.83
+9172.54
+9179.33
+9182.27
+9172.99
+
 
 Index Order: i-k-j with Blocking
 
 Size of matrix 2048 x 2048
-Execution Time;3771,42
-Execution Time;3771,22
-Execution Time;3763,61
-Execution Time;3777,48
-Execution Time;3763,99
-Execution Time;3769,93
-Execution Time;3773,09.
-Execution Time;3771,64
+9185.16
+9181.65
+9186.97
+9177.55
+9175.15
+9176.79
+9174.93
+9176.29
+
 
 Index Order: j-k-i Transposed with Blocking
 
 Size of matrix 2048 x 2048
-Execution Time;3886,22
-Execution Time;3888,9
-Execution Time;3891,58
-Execution Time;3887,19
-Execution Time;3883,45
-Execution Time;3888,17
-Execution Time;3871
-Execution Time;3880,34
+9188.77
+9195.38
+9187.97
+9186.38
+9182.65
+9181.3
+9184.47
+9183.92
+
+
+
+Index Order: i-j-k Transposed with Blocking and Vectorization 
+
+Size of matrix 32 x 32
+0,012
+0,009
+0,01
+0,009
+0,009
+0,009
+0,009
+0,009
+
+Size of matrix 128 x 128
+0,613
+0,599
+0,602
+0,592
+0,59
+0,598
+0,595
+0,59
+
+
+Index Order: i-k-j with Blocking and Vectorization
+
+Size of matrix 32 x 32
+0,011
+0,009
+0,009
+0,009
+0,009
+0,009
+0,008
+0,009
+
+Size of matrix 128 x 128
+0,578
+0,577
+0,575
+0,571
+0,568
+0,569
+0,568
+0,573
+
+
+Index Order: j-k-i Transposed with Blocking and Vectorization
+
+Size of matrix 32 x 32
+0,012
+0,012
+0,011
+0,01
+0,01
+0,01
+0,011
+0,01
+
+Size of matrix 128 x 128
+0,618
+0,612
+0,614
+0,611
+0,608
+0,61
+0,609
+0,615
+
+Index Order: i-j-k Transposed with Paralelization
+
+Size of matrix 2048 x 2048
+373.023
+304.359
+307.652
+300.913
+300.638
+298.291
+301.396
+297.726
+
+Index Order: i-k-j with Paralelization
+
+Size of matrix 2048 x 2048
+374.442
+229.521
+229.199
+229.743
+224.909
+223.42
+223.605
+223.566
+
+Index Order: j-k-i with Paralelization
+
+Size of matrix 2048 x 2048
+2037.19
+330.545
+331.083
+331.17
+325.501
+326.885
+325.499
+325.21
+
+Index Order: i-j-k with KNL
+
+Size of matrix 2048 x 2048
+1643.49
+1520.88
+1458.92
+1471.27
+1482.62
+1494.31
+1461.48
+1475.45
+
+Index Order: i-k-j with KNL
+
+Size of matrix 2048 x 2048
+336.22
+149.236
+1748.95
+145.166
+146.113
+146.18
+146.678
+1528.68
+
+Index Order: j-k-i with KNL
+
+Size of matrix 2048 x 2048
+656.965
+338.593
+337.599
+339.594
+336.227
+336.446
+336.436
+373.197

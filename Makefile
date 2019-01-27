@@ -60,7 +60,6 @@ endif
 SRC_DIR = src
 BIN_DIR = bin
 BUILD_DIR = build
-LOG_DIR = logs
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ = $(patsubst src/%.cpp,build/%.o,$(SRC))
 DEPS = $(patsubst build/%.o,build/%.d,$(OBJ))
@@ -82,6 +81,9 @@ $(BIN_DIR)/$(BIN_NAME): $(DEPS) $(OBJ)
 checkdirs:
 	@mkdir -p $(BUILD_DIR)
 	@mkdir -p $(BIN_DIR)
+
+cuda:
+	nvcc --dont-use-profile -ldir /home/a77763/tools/nvvm/libdevice -I/home/a77763/tools/include -L/home/a77763/tools/lib64 -ccbin=/home/a77763/tools/gcc-4.9.3/bin/gcc src/MatrixMulot.cu -o bin/main_cuda
 
 all: checkdirs $(BIN_DIR)/$(BIN_NAME)
 

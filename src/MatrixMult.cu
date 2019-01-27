@@ -88,6 +88,5 @@ int main (int argc, char** argv) {
 	float *a,*b,*c;
     newMatrices(&a,&b,&c,N);
     stencil(a,b,c,N);
-    checker(c,N);
 	return 0;
 }
