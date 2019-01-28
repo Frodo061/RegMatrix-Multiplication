@@ -83,7 +83,7 @@ checkdirs:
 	@mkdir -p $(BIN_DIR)
 
 cuda:
-	nvcc --dont-use-profile -ldir /home/a77763/tools/nvvm/libdevice -I/home/a77763/tools/include -L/home/a77763/tools/lib64 -ccbin=/home/a77763/tools/gcc-4.9.3/bin/gcc src/MatrixMulot.cu -o bin/main_cuda
+	nvcc --dont-use-profile -ldir /home/a77763/tools/nvvm/libdevice -I/home/a77763/tools/include -L/home/a77763/tools/lib64 -ccbin=gcc src/MatrixMulot.cu -o bin/main_cuda
 
 all: checkdirs $(BIN_DIR)/$(BIN_NAME)
 
