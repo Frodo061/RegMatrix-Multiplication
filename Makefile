@@ -21,6 +21,10 @@ ifeq ($(VEC),no)
 	CXXFLAGS += -no-vec
 endif
 
+ifeq ($(KNL),yes)
+	CXXFLAGS += -march=knl 
+endif
+
 ifeq ($(PAPI),yes)
 	CXXFLAGS += -I/share/apps/papi/5.5.0/include -L/share/apps/papi/5.5.0/lib -lpapi -DPAPI
 endif

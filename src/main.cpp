@@ -16,7 +16,7 @@ void (*dp_func)(float **, float **, float **, unsigned);
 int main(int argc, char *argv[]) {
 
     if(argc < 3) {
-        cout << "usage: bin/main size(32|128|1024|2048)" "type(time|l1mr|l2mr|l3mr|flops|vecops)" << endl;
+        cout << "usage: bin/main size(32|128|1024|2048) type(time|l1mr|l2mr|l3mr|flops|vecops)" << endl;
         return -1;
     }
 
